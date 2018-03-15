@@ -10,10 +10,14 @@ body {
     }
 
     .owl-carousel .owl-item{
-        height:270px;        
+        /* height:362px;         */
+        /* min-height: 300px; */
         
     }
 
     .owl-carousel .owl-item img {
-        width: unset !important;
+        /* width: unset !important; */
+        /* height:362px; */
+        /* max-height: 300px; */
+        /* min-height: 150px; */
     }
