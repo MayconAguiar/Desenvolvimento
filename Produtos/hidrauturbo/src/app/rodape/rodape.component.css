@@ -1,0 +1,118 @@
+/* NEWSLETTER */
+.bg-black {background-color: #130400; }
+
+.rodape {
+    float: left;
+    width: 100%;    
+}
+
+.servicos {
+    padding-top: 1%;
+    width: 98%;
+    margin: 0 auto;
+    font-family: 'Anton', sans-serif;
+    /* font-size: 65px;
+    font-size: 3.0625rem;
+    color: #c79f6d; */
+    letter-spacing: 1px;
+}
+
+.conteudo {
+    width: 100%;
+    float: left;
+    padding: 3%;
+    
+}
+
+.imagem {
+    float: left;
+    width: 20%;
+    margin: 0 auto;
+    vertical-align: center;
+}
+
+.texto {
+    float: left;
+    width: 80%;
+    /* max-width: 280px;  */
+}
+
+h3 {
+    font-size: 15px;    
+    line-height: 20px;
+    font-size: 0.9em; 
+    color: #fff; 
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+img {
+    max-width: 40px;    
+}
+
+h3 a {
+    display: none;
+}
+
+/* ========== MOBILE FIRST ==========*/
+    /* SMALL DEVICES - SMARTPHONES */
+@media screen and (min-width: 480px) {
+    .conteudo {
+        padding: 10px;
+    }    
+    
+
+    .imagem {
+        width: 10%;
+    }
+    
+    .texto {
+        width: 90%;    
+    }
+
+    h3 {
+        line-height: 20px;
+        font-size: 1.1em;         
+        font-weight: 700;
+        padding: 1%;        
+    }
+}
+/* SMALL DEVICES - TABLETS*/
+@media screen and (min-width: 768px) {
+    .conteudo {
+        /* width: 70%; */
+        margin: 0 auto;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .imagem {        
+        display: none;
+    }
+
+    h3 a {
+        display: inline-block;
+        padding-right: 20px;
+    }
+    
+    .texto {
+        width: 100%;    
+    } 
+
+    
+
+}
+/* MEDIUM DEVICES - TABLETS & DESKTOPS*/
+@media screen and (min-width: 960px) {
+    
+
+}
+/* LARGE DEVICES - WIDE SCREENS*/
+@media screen and (min-width: 1280px) {
+
+}
+        
+        
+        
+        

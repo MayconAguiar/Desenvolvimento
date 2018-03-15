@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hidrauturbo</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <header>
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+      <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">    
+    <!-- <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+    <script src="http://cdn.rawgit.com/hammerjs/touchemulator/master/touch-emulator.js"></script>     -->
+    
+    <!-- <script src="http://code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script> -->
+  </header>
+  
+</head>
+<body>  
+  <app-root></app-root>
+</body>
+<script>
+  // $(document).ready(function() {
+  //    $("#myCarousel").swiperight(function() {
+  //       $(this).carousel('prev');
+  //     });
+  //    $("#myCarousel").swipeleft(function() {
+  //       $(this).carousel('next');
+  //    });
+  // });
+
+  $(document).ready(function() {
+
+      $(".btn-menu").click(function(){
+                $(".conteudoMobile").show();
+       });
+     $(".conteudoMobile ul li").click(function(){
+            $(".conteudoMobile").hide();
+       });
+      $(".btn-close").click(function(){
+         $(".conteudoMobile").hide();
+      });
+
+    //   console.log('index carregado');
+    //   console.log($('.owl-carousel'));
+
+    
+
+    
+    // $('.owl-carousel').owlCarousel({
+    //     loop:false,
+    //     margin:10,
+    //     autoplay: true,    
+    //     responsive:{
+    //         0:{
+    //             items:1
+    //         },
+    //         600:{
+    //             items:1
+    //         },
+    //         1000:{
+    //             items:1
+    //         }
+    //     }
+    // });
+
+    // $('.owl-carousel').trigger("carrosselCarregado");
+    // console.log("owlcarouselCarregado");
+    // $(document).trigger("owlcarouselCarregado");
+            
+  });
+
+    
+
+  </script>
+</html>
+
+

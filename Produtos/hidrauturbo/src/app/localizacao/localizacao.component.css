@@ -1,0 +1,126 @@
+
+.google-maps {
+    position: relative;
+    /* padding-bottom: 75%; */
+    /* height: 0; */
+    height: 220px;
+    overflow: hidden;
+}
+/* .google-maps iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+} */
+
+.google-maps iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.conteudo {
+    width: 100%;
+    float: left;
+    padding: 3%;
+}
+
+.imagem {
+    float: left;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.texto {
+    float: left;    
+    width: 100%;
+}
+
+.texto h3 {
+    line-height: 30px;
+}
+
+h2 {
+    font-size: 23px;    
+}
+
+h3 {
+    font-size: 15px;    
+}
+
+img {
+    width: 100%;    
+}
+
+/* ========== MOBILE FIRST ==========*/
+    /* SMALL DEVICES - SMARTPHONES */
+    @media screen and (min-width: 480px) {
+       
+        }
+        /* SMALL DEVICES - TABLETS*/
+        @media screen and (min-width: 768px) {
+            
+            .google-maps {                
+                /* padding-bottom: 75%; */
+                /* height: 0; */
+                float: left;
+                width: 50%;
+                height: 220px;
+                
+            }
+            /* .imagem {
+                float: left;
+                width: 50%;
+            }
+            
+            .conteudo {
+                width: 100%;
+                float: left;
+                padding: 3%;
+            } */
+            
+            .texto {
+                float: left;
+                width: 50%;
+                padding: 1%;
+            }
+
+            .texto h3 {
+                line-height: 40px;
+            }
+
+            /* img {
+                max-width: 280px;
+            } */
+
+            
+
+            
+
+        }
+        /* MEDIUM DEVICES - TABLETS & DESKTOPS*/
+        @media screen and (min-width: 960px) {
+            h2 {
+                font-size: 30px;    
+            }
+            
+            h3 {
+                font-size: 24px;    
+            }
+
+            img {
+                max-width: unset;
+            }
+       
+        }
+        /* LARGE DEVICES - WIDE SCREENS*/
+        @media screen and (min-width: 1280px) {
+       
+        }
+        
+        
+        
+        

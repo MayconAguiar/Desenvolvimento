@@ -1,0 +1,126 @@
+
+.servicos {
+    padding-top: 1%;
+    width: 98%;
+    margin: 0 auto;
+    font-family: 'Anton', sans-serif;
+    font-size: 65px;
+    font-size: 3.0625rem;
+    color: #c79f6d;
+    letter-spacing: 1px;
+    
+}
+
+.conteudo {
+    width: 100%;
+    float: left;
+    padding: 3%;
+}
+
+.imagem {
+    float: left;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.texto {
+    float: left;
+    /* width: 100%; */
+    max-width: 350px; 
+}
+
+.texto h3 {
+    line-height: 30px;
+}
+
+.tipoServico {
+    width: 20%;
+    background-color: #f5f5f5;
+}
+
+.tipoServico img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.titulo {
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+h2 {
+    font-size: 23px;    
+}
+
+h3 {
+    font-size: 15px;    
+}
+
+img {
+    width: 100%;    
+}
+
+/* ========== MOBILE FIRST ==========*/
+    /* SMALL DEVICES - SMARTPHONES */
+    @media screen and (min-width: 480px) {
+       
+        }
+        /* SMALL DEVICES - TABLETS*/
+        @media screen and (min-width: 768px) {
+            
+            
+            .imagem.dois {
+                float: right;
+            }
+
+            .imagem {
+                float: left;
+                width: 50%;
+            }
+            .conteudo {
+                width: 100%;
+                float: left;
+                padding: 3%;
+            }
+            .texto {
+                float: left;
+                width: 50%;
+                padding: 1%;
+            }
+
+            .texto h3 {
+                line-height: 40px;
+            }
+
+            img {
+                max-width: 280px;
+            }
+
+            
+
+            
+
+        }
+        /* MEDIUM DEVICES - TABLETS & DESKTOPS*/
+        @media screen and (min-width: 960px) {
+            h2 {
+                font-size: 30px;    
+            }
+            
+            h3 {
+                font-size: 24px;    
+            }
+
+            img {
+                max-width: unset;
+            }
+       
+        }
+        /* LARGE DEVICES - WIDE SCREENS*/
+        @media screen and (min-width: 1280px) {
+       
+        }
+        
+        
+        
+        

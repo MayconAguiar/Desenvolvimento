@@ -1,0 +1,11 @@
+input {
+    max-width: 400px;
+}
+
+textarea {
+    max-width: 500px;
+}
+
+button {
+    width: 300px;
+}

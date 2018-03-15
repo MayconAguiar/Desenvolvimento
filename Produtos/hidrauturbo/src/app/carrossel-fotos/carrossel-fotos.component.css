@@ -1,0 +1,13 @@
+img {
+     /* max-height: 350px;   */
+    /*width: unset !important;
+    max-width: 100%;
+    /* height: unset !important; */
+    /* margin: 0 auto; */ 
+    /* max-width: 100%; */
+}
+
+.component {
+    width: 100%;
+    float: left;
+}

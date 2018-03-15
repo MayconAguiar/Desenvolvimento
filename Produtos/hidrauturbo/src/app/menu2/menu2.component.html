@@ -1,0 +1,43 @@
+<div class="menumobile">
+  
+  <div class="botao">
+  <button class="btn-menu bg-gradient"><i class="fa fa-bars fa-lg"></i></button>
+</div>
+  <div class="conteudoMobile">    
+    <a class="btn-close"><i class="fa fa-times"></i></a>
+    
+    <ul>
+      <li routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"><a  [routerLink]="['/']" ><span>Home</span></a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/empresa']">Empresa</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/pecas']">Peças</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/servicos']">Serviços</a></li>                   
+      <li routerLinkActive='active'><a [routerLink]="['/contato']">Contato</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/localizacao']" >Localização</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/gallery']" >Galeria de Fotos</a></li>
+    </ul>    
+  </div>
+</div>
+  
+<div class="menu">
+
+  <div class="container">    
+    <!-- <ul class="nav nav-tabs nav-justified">      
+      <li routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"><a  [routerLink]="['/']" ><span>Home</span></a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/empresa']">Empresa</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/pecas']">Peças</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/servicos']">Serviços</a></li>                   
+      <li routerLinkActive='active'><a [routerLink]="['/contato']">Contato</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/gallery']" >Galeria de Fotos</a></li>
+    </ul> -->
+
+    <ul class="nav nav-pills nav-justified itensMenu">
+      <li routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"><a  [routerLink]="['/']" ><span>Home</span></a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/empresa']">Empresa</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/pecas']">Peças</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/servicos']">Serviços</a></li>                   
+      <li routerLinkActive='active'><a [routerLink]="['/contato']">Contato</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/localizacao']" >Localização</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/gallery']" >Fotos</a></li>
+    </ul>    
+  </div>
+</div>

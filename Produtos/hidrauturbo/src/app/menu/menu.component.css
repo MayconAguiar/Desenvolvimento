@@ -1,0 +1,105 @@
+
+    a {text-decoration: none;}
+    ul {list-style: none;}
+    
+    /*=========== conteudo ==========*/
+    .conteudo         
+    {
+        width: 100% !important; 
+        /* float: left; */
+        /* padding-top: 3%;
+        padding-right: 3%;              */
+        /* margin: 0 auto; */
+        vertical-align: middle;
+        text-align: center;
+        margin-left: auto;
+        margin-top: auto;
+    }     
+    
+    /*=========== BG COLORS ==========*/
+    .bg-gradient {background: linear-gradient(to right,#ce2e3c,#da6709);}
+    /* .bg-black {background-color: #130400; }
+    .bg-white {background-color: #fff;} */
+    /*=========== HELPERS ==========*/
+    /* .radius {border-radius: 7px;} */
+    /* CABEÇALHO */
+    /* .logo {width: 56px; height: 105px; float: left; background: url(../../assets/img/htlogo.png) center center/56px no-repeat; */
+        /* .logo {width: 300px; height: 105px; float: left; background: url(../../assets/img/ht3.jpg) center center/56px no-repeat;
+    font-size: 0;} */
+    .btn-menu {width: 56px; height: 56px; float: right; text-align: center; color: #fff; border-radius:56px; cursor: pointer;}
+    /* MENU */
+    .menu {display:none; width: 100%; height: 100%; position: fixed; background-color: rgba(0,0,0,0.9); top: 0; left: 0; z-index: 999 }
+    .btn-close {font-size: 1.5em; color: #fff; float: right; cursor: pointer; margin: 2% 3% 0 0;}
+    .menu ul {width: 100%; float: left; text-align: center;}
+    .menu li {padding: 1.5%;}
+    .menu li a {font-size: 2em; color: #fff; padding: 1.5% 3%;}
+    .menu li a:hover {border:1px solid #da6709;}    
+    /* ========== MOBILE FIRST ==========*/
+    /* SMALL DEVICES - SMARTPHONES */
+
+    /* .divLogo img{       
+        display: none;
+    } */
+
+    /* .divLogo {
+        width: 70%;
+        height: 60px;
+        float: left;        
+    }
+    
+    .divLogo img{
+        width: 100%;
+        height: 60px;
+        display: block;
+    } */
+
+    
+    @media screen and (min-width: 480px) {
+
+        /* .divLogo {
+            width: 100%;
+            height: 200px;
+            float: left;        
+        }
+        
+        .divLogo img{
+            width: 100%;
+            height: 200px;
+            display: block;
+        } */
+            
+        /* .menu {
+            width: 100%;
+        } */
+    
+        .logo { 
+            /* width: 100%; 
+            height: 300px;  */
+            /* background: url(../../assets/img/ht.jpg) center center no-repeat; */
+            display: none;
+        }
+        .btn-menu {display: none;}
+        .btn-close {display: none;}    
+        .menu {
+            width: 100%; 
+            height: 56px; line-height: 56px; float: right; background-color: #f5f5f5; 
+        display: block !important; position: static;}
+        .menu li {padding: 0; float: left;}
+        .menu li a {color:#130400; font-size: 1em; padding: 15px; }
+        .menu li a:hover {border: none; color:#da6709; }
+    }
+
+    /* SMALL DEVICES - TABLETS*/
+    @media screen and (min-width: 768px) {
+    
+    
+    }
+    /* MEDIUM DEVICES - TABLETS & DESKTOPS*/
+    @media screen and (min-width: 960px) {
+    
+    }
+    /* LARGE DEVICES - WIDE SCREENS*/
+    @media screen and (min-width: 1280px) {
+    
+    }
+    

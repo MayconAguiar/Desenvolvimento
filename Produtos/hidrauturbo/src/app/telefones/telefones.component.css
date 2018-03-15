@@ -1,0 +1,71 @@
+.telefones{
+    background-color: black;
+    /* font-family: 'Anton script=latin rev=2';
+    font-size: 2em;
+    
+    color: white; */
+    /* font-family: 'Bowlby One SC', cursive; */
+    font-size: 0.9em; color: #fff; font-weight: bold;
+    width: 100%;
+    
+    float: left;
+    padding-top: 1%;    
+    
+}
+
+.telefone {
+    width: 50%;
+    height: 25px;
+    float: left;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 900;
+    font-size: 17px;
+}
+
+.tres {
+    display: none;
+}
+
+@media screen and (min-width: 388px) {
+    /* .telefone {        
+        height: 35px;
+    }     */
+
+    .telefones{        
+        font-size: 1.2em;
+        letter-spacing: 1px;
+    }
+    
+}
+  
+@media screen and (min-width: 500px) {
+    /* .telefone {        
+        height: 35px;
+    }     */
+
+    .telefone {
+        font-size: 26px;       
+        height: 35px;
+    } 
+    
+}
+  
+@media screen and (min-width: 768px) {
+    .telefone {
+        width: 33%;
+    } 
+    .tres {        
+        display: block;
+    }   
+}  
+  
+/* MEDIUM DEVICES - TABLETS & DESKTOPS*/
+@media screen and (min-width: 960px) {
+
+}
+/* LARGE DEVICES - WIDE SCREENS*/
+@media screen and (min-width: 1280px) {
+
+}
