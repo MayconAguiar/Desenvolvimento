@@ -28,6 +28,7 @@ import { Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
 import { LocalizacaoComponent } from './localizacao/localizacao.component';
+import { ContatoWhatsappComponent } from './contato-whatsapp/contato-whatsapp.component';
 
 
 
@@ -51,7 +52,8 @@ import { LocalizacaoComponent } from './localizacao/localizacao.component';
      CarrosselComponent,
      TelefonesComponent,
      RodapeComponent,
-     LocalizacaoComponent    
+     LocalizacaoComponent,
+     ContatoWhatsappComponent    
   ],
   imports: [
     BrowserModule, OwlModule,routing, ReactiveFormsModule, FormsModule, HttpClientModule, HttpModule ],

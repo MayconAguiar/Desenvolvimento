@@ -1,0 +1,49 @@
+.whatsapp {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    background: #fff;
+    border: 1px solid green;
+    font-size: 20px;
+    z-index: 99;
+    padding: 5px 15px;
+    display: inline;
+    color: green;
+    border-radius: 50px;
+    margin-left: -120px;
+    font-family: cordia!important;
+    text-decoration: none;
+}
+
+.whatsapp img {
+    display: inline;
+}
+
+@media screen and (min-width: 388px) {    
+    
+}
+  
+@media screen and (min-width: 500px) {
+    
+    
+}
+  
+@media screen and (min-width: 768px) {
+    .whatsapp {
+        font-size: 30px;
+        bottom: unset;        
+        top: 290px;
+        left: unset;
+        right: 2%;        
+    }
+    
+}  
+  
+/* MEDIUM DEVICES - TABLETS & DESKTOPS*/
+@media screen and (min-width: 960px) {
+
+}
+/* LARGE DEVICES - WIDE SCREENS*/
+@media screen and (min-width: 1280px) {
+
+}
