@@ -33,16 +33,6 @@
     line-height: 30px;
 }
 
-.tipoServico {
-    width: 20%;
-    background-color: #f5f5f5;
-}
-
-.tipoServico img {
-    max-width: 100px;
-    max-height: 100px;
-}
-
 .titulo {
     padding-top: 1%;
     padding-bottom: 1%;
@@ -57,7 +47,7 @@ h3 {
 }
 
 img {
-    width: 100%;    
+    width: 100%;      
 }
 
 /* ========== MOBILE FIRST ==========*/

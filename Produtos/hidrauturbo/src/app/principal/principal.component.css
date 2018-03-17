@@ -62,7 +62,7 @@ You can add global styles to this file, and also import other style files
     .btn-sobre {color:#fff ; margin-top: 2%;}
     /* SERVIÇOS */
     .servico {width: 100%;  text-align: left;  margin-bottom: 3%; height: auto;}
-    .servico img {border-radius: 7px 7px 0 0;}
+    .servico img {border-radius: 7px 7px 0 0; max-height: 170px}
     .inner {padding: 7%;}
     .inner a {font-size: 1.5em; color: #130400; font-weight: 700; }
     .inner h4 {font-size: 1.2em; color: #130400; margin-top: 2%; }
@@ -83,10 +83,11 @@ You can add global styles to this file, and also import other style files
     @media screen and (min-width: 480px) {
     .logo {max-width: 100px; height: 70px; background: url(../../assets/img/htlogosmall.png) center center/214px no-repeat;}
     .btn {font-size: 2em;}
+    .servico img {max-height: unset;}
     }
     /* SMALL DEVICES - TABLETS*/
     @media screen and (min-width: 768px) {
-    .servico {width: 49%; float: left; margin-right: 2%; height: 560px;}
+    .servico {width: 49%; float: left; margin-right: 2%; height: 560px;}    
     .servico:nth-child(2){margin-right: 0;}
     .newsletter h2 {font-size: 2em;}
     .newsletter h3 {font-size: 1.5em;}

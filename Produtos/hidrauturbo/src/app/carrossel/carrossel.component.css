@@ -3,3 +3,42 @@
     float: left;
     padding-top: 1%;
 }
+
+.padrao {
+    display: none !important;
+}
+
+/* ========== MOBILE FIRST ==========*/
+    /* SMALL DEVICES - SMARTPHONES */
+    @media screen and (min-width: 480px) {
+        .mobile {
+            display: none !important;
+        }
+
+        .padrao {
+            display: block !important;
+        }
+    }
+         /* SMALL DEVICES - TABLETS*/
+         @media screen and (min-width: 768px) {
+             
+             
+             
+             
+ 
+             
+ 
+         }
+         /* MEDIUM DEVICES - TABLETS & DESKTOPS*/
+         @media screen and (min-width: 960px) {
+             
+        
+         }
+         /* LARGE DEVICES - WIDE SCREENS*/
+         @media screen and (min-width: 1280px) {
+        
+         }
+         
+         
+         
+         
