@@ -1,3 +1,30 @@
+.cabecalho {
+    width: 100%;
+    float: left;
+    
+}
+
+.cabecalho img {
+    width: 80px;
+}
+
+.cabecalho div {
+    float: left;
+}
+
+.texto  {
+    margin-left: 15px;    
+    margin-top: 30px;
+    font-weight: 900;
+    font-size: 18px;
+    overflow: hidden;
+}
+
+span {
+    /* display: table; */
+    margin: 0 auto;
+}
+
 .imagem {
     float: left;
     width: 320px;
@@ -5,7 +32,7 @@
     padding: 1%;
 }
 
-img {
+.contentimagem img {
     min-width: 300px;
     max-height: 180px;
 }
@@ -25,4 +52,30 @@ img {
 a {
     text-decoration: none;
     color: black;
+}
+
+@media screen and (min-width: 388px) {
+    
+    
+}
+  
+@media screen and (min-width: 500px) {
+    .texto  {
+        margin-left: 25px;            
+        font-weight: 900;
+        font-size: 40px;
+    }
+}
+  
+@media screen and (min-width: 768px) {
+    
+}  
+  
+/* MEDIUM DEVICES - TABLETS & DESKTOPS*/
+@media screen and (min-width: 960px) {
+
+}
+/* LARGE DEVICES - WIDE SCREENS*/
+@media screen and (min-width: 1280px) {
+
 }

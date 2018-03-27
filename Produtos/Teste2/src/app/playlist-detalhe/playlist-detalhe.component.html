@@ -1,5 +1,12 @@
 
-
+<div class="cabecalho" [routerLink]="['/playlist']">
+    <div>
+      <img src="assets/tvcamara.jpg" alt=""> 
+    </div>
+    <div class="texto">
+      {{titulo}}
+  </div>
+</div>
 <a  *ngFor="let item of items" class="imagem" href="http://www.youtube.com/embed/{{item.snippet.resourceId.videoId}}?autoplay=1&enablejsapi=1">
   <div class="contentimagem">
     <img src="{{item.snippet.thumbnails.medium.url}}">

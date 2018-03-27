@@ -7,7 +7,7 @@ import { InfoPlaylistComponent } from './info-playlist/info-playlist.component';
 const routes: Routes = [
   { path: 'playlist', component: PlaylistComponent },  
   { path: 'teste', component: InfoPlaylistComponent },  
-  { path: 'playlistdetalhe/:id', component: PlaylistDetalheComponent }
+  { path: 'playlistdetalhe/:id/:titulo', component: PlaylistDetalheComponent }
 ];
 
 @NgModule({

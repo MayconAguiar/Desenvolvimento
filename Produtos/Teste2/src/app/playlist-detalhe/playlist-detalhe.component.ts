@@ -10,6 +10,7 @@ import { YoutubeService } from '../youtube/youtube.service';
 export class PlaylistDetalheComponent implements OnInit {
 
   id: number;
+  titulo: string;
   private sub: any;
   private items : any;
   
@@ -24,12 +25,13 @@ export class PlaylistDetalheComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       
       this.id = params['id'];
+      this.titulo = params['titulo'];
 
       var that = this;
       this.youtubeService.obtenhaVideos(this.id)    
       .then((result : any)=>{ 
         that.items = result.json().items; 
-        console.log(that.items), () => {}
+        console.log(that.items);
       });
    });
   }  

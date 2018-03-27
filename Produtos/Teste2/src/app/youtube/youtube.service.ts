@@ -63,8 +63,7 @@ export class YoutubeService {
 
   obtenhaVideos(id){
     let promise = new Promise((resolve, reject) => {
-      let apiURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + id + "&maxResults=50&key=AIzaSyB_KiAgBotBx0DQngxlCi4NLGSznTGW9vY";
-      console.log(apiURL);
+      let apiURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + id + "&maxResults=50&key=AIzaSyB_KiAgBotBx0DQngxlCi4NLGSznTGW9vY";      
       this.http.get(apiURL)
         .toPromise()
         .then(
