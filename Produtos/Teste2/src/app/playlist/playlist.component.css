@@ -1,0 +1,14 @@
+.imagem {
+    float: left;
+    width: 320;
+    height: 180;
+    padding: 1%;
+}
+
+img {
+    min-width: 300px;
+    max-height: 180px;
+}
+a {
+    color: black;
+}

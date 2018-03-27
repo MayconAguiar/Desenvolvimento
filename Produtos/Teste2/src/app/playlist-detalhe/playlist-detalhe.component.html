@@ -1,0 +1,12 @@
+
+
+<a  *ngFor="let item of items" class="imagem" href="http://www.youtube.com/embed/{{item.snippet.resourceId.videoId}}?autoplay=1&enablejsapi=1">
+  <div class="contentimagem">
+    <img src="{{item.snippet.thumbnails.medium.url}}">
+  </div>
+  <div class="titulo">
+    <h3>{{item.snippet.title}}</h3>
+    <h6>{{item.snippet.description}}</h6>
+  </div>
+</a>  
+

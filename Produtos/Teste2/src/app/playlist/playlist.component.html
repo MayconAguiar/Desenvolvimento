@@ -1,0 +1,15 @@
+<div *ngFor="let item of items">
+  <a class="imagem" [routerLink]="['/playlistdetalhe', item.id]" >
+    <div class="contentimagem">
+      <img src="{{item.snippet.thumbnails.medium.url}}">
+    </div>
+    <div class="titulo">
+      <h3>{{item.snippet.title}}</h3>
+    </div>
+
+
+  </a>
+  
+</div>
+
+

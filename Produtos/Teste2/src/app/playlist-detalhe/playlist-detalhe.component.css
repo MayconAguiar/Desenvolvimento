@@ -1,0 +1,28 @@
+.imagem {
+    float: left;
+    width: 320px;
+    /* height: 180px; */
+    padding: 1%;
+}
+
+img {
+    min-width: 300px;
+    max-height: 180px;
+}
+
+.titulo {
+    max-width: 320px;
+    word-wrap: break-word;
+    /* min-height: 100px; */
+    height: 40px;
+    text-overflow: ellipsis;
+}
+
+.conteudo {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
