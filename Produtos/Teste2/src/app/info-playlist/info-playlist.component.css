@@ -1,0 +1,32 @@
+.contentIconeTexto {
+    /* opacity: 0.3;
+    background-color: black; */
+    background-color: rgb(0, 0, 0, 0.5);
+    width: 100px;
+    height: 180px;    
+}
+
+.contentIconeTexto .texto {
+    color:  hsla(0, 0%, 100%, .8);    
+    position: absolute;
+    margin-top: 58px;
+    margin-left: 40px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2rem;    
+}
+
+.icone {    
+    margin-top: 89px;
+    width: 72px;
+    position: absolute;
+    margin-left: 20px;
+
+}
+g {
+    stroke:none;
+    fill:hsla(0, 0%, 100%, .8);
+}
+path {
+    color: hsla(0, 0%, 100%, .8);
+}

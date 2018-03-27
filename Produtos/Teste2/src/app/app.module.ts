@@ -9,7 +9,9 @@ import { PlaylistComponent } from './playlist/playlist.component';
 import { PlaylistDetalheComponent } from './playlist-detalhe/playlist-detalhe.component';
 
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
+import { InfoPlaylistComponent } from './info-playlist/info-playlist.component';
+import { YoutubeService } from './youtube/youtube.service';
 
 
 
@@ -17,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     PlaylistComponent,
-    PlaylistDetalheComponent
+    PlaylistDetalheComponent,
+    InfoPlaylistComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpModule,
     HttpClientModule 
   ],
-  providers: [],
+  providers: [YoutubeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

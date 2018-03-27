@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Http } from '@angular/http';
+import { YoutubeService } from '../youtube/youtube.service';
 
 @Component({
   selector: 'app-playlist-detalhe',
@@ -15,7 +15,7 @@ export class PlaylistDetalheComponent implements OnInit {
   
 
 
-  constructor(private http:Http, private route: ActivatedRoute) { }
+  constructor(private youtubeService: YoutubeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -26,29 +26,13 @@ export class PlaylistDetalheComponent implements OnInit {
       this.id = params['id'];
 
       var that = this;
-      this.obtenhaVideos(this.id)    
+      this.youtubeService.obtenhaVideos(this.id)    
       .then((result : any)=>{ 
         that.items = result.json().items; 
         console.log(that.items), () => {}
       });
    });
-  }
-
-  obtenhaVideos(id){
-    let promise = new Promise((resolve, reject) => {
-      let apiURL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + id + "&maxResults=50&key=AIzaSyB_KiAgBotBx0DQngxlCi4NLGSznTGW9vY";
-      this.http.get(apiURL)
-        .toPromise()
-        .then(
-          res => {             
-            // Success
-            resolve(res);
-          }
-        );
-    });
-    return promise;
-  }
-
+  }  
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

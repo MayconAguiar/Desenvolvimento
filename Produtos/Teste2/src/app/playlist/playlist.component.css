@@ -1,7 +1,7 @@
 .imagem {
     float: left;
-    width: 320;
-    height: 180;
+    width: 320px;
+    /* height: 200px; */
     padding: 1%;
 }
 
@@ -12,3 +12,27 @@ img {
 a {
     color: black;
 }
+
+.contentimagem {
+    width: 320px;
+    height: 180px;
+    background-repeat: no-repeat;
+    background-size: 300px 180px;
+    float: left;
+}
+
+.titulo {
+    height: 60px;
+    overflow: hidden;
+    width: 300px;
+}
+
+conteudo {
+    padding: 2%;
+}
+
+.contentIconeTexto {    
+    position: absolute;
+    margin-left: 199px;   
+}
+
