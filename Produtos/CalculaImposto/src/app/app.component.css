@@ -1,0 +1,14 @@
+.carouselExampleControls {
+    float: left;
+    width: 100%;
+    height: 100px;
+}
+
+.menu-desktop {
+    display: inline-block;
+  }
+
+h2 {
+font-size: 20px;
+font-weight: bold;
+}

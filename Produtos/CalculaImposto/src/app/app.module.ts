@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MomentModule} from 'angular2-moment/moment.module';
 
 
 import { AppComponent } from './app.component';
@@ -10,7 +11,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, MomentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
