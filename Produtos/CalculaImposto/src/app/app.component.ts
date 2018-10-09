@@ -32,22 +32,42 @@ class Atributo {
 export class AppComponent {
   title = 'app';
   lista = [];
-  listaporacao = [];
+  listaDeOperacao = [];
+  keys = [];
   acoes = [];
-  datas = [ ];
-  
+  datas = [];
+  dataSelecionada = '';
+  acaoSelecionada = '';
+
+  listaDeOperacaoFiltrada = [];
+
   // datas = [ new Mes('teste', true), new Mes('teste2', false) ];
 
   public changeListener(files: FileList) {
 
+    const that = this;
     this.leiaArquivos(files).subscribe(
       x => {},
-      x => {}, 
-      ()=> {
-        this.processe();
-        console.log(this.listaporacao);
-    })
-    
+      x => {},
+      () => {
+        that.listaDeOperacao = this.processe(this.listaDeOperacao, this.datas, this.lista);
+        this.keys = Object.keys(this.listaDeOperacao);
+        console.log(this.datas);
+    });
+
+  }
+
+  selecionaData(value) {
+    this.dataSelecionada = value;
+    debugger;
+    this.listaDeOperacao.filter(function(el) {
+      console.log(el);
+      return true;
+    });
+  }
+
+  selecionaAcao(value) {
+    this.acaoSelecionada = value;
   }
 
   leiaArquivos(files: FileList) {
@@ -55,11 +75,11 @@ export class AppComponent {
       moment.locale('pt-br');
       // console.log(files);
       if (files && files.length > 0) {
-          this.leiaArquivo(files, 0, observer)
-          console.log(this.listaporacao);
+          this.leiaArquivo(files, 0, observer);
+          console.log(this.listaDeOperacao);
       } else {
-        observer.complete();        
-      }        
+        observer.complete();
+      }
     });
   }
 
@@ -73,36 +93,48 @@ export class AppComponent {
       const that = this;
       reader.onload = (e) => {
             const csv = reader.result;
-            index +=1;
+            index += 1;
             this.lista.push(that.csvJSON(csv));
             this.leiaArquivo(files, index, observer);
         };
       }
   }
 
-  processe () {
-    const ATIVO = "Ativo";
-    const DATA = "Atualizado em";
-    const input =  this.lista;
-    
-    for (let i = 0; i < input.length; i++) {        
+  processe (operacoes, datas: any[], files) {
+    moment.locale('pt-br');
+    const ATIVO = 'Ativo';
+    const DATA = 'Atualizado em';
+    const input =  files;
+    // return [ {teste: 'teste'} ];
+    for (let i = 0; i < input.length; i++) {
         const item =  JSON.parse(input[i])[0];
-        
-        let listaDeOperacoes: any[] = this.listaporacao[ATIVO];
+        const nomeDoAtivo = item[ATIVO];
+        const data = moment(item[DATA].substr(0, 10) , 'DD/MM/YYYY').format('MMMM/YYYY');
 
-        if (!listaDeOperacoes) 
-        {
-          listaDeOperacoes = [];
-          const elemento = { ATIVO: listaDeOperacoes };
-          this.listaporacao.push(elemento);          
+        if (datas.indexOf(data) === -1) {
+          datas.push(data);
         }
-        listaDeOperacoes.push("teste 2");
-        /// listaDeOperacoes.push(item);
+
+        let itens: any[] = operacoes[nomeDoAtivo];
+
+
+        if (!itens) {
+          itens = [];
+          operacoes[nomeDoAtivo] = itens;
+        }
+
+        itens.push(item);
     }
+
+    return operacoes;
   }
 
+  // keys(): Array<string> {
+  //   return Object.keys(this.listaDeOperacao);
+  // }
+
   obtenhaAtributo(key, uniqueList, obtenhaValor = (x) => new Atributo(x, x) ) {
-    //const unique = {};
+    // const unique = {};
     // const uniqueList = [];
     const input =  this.lista;
 
