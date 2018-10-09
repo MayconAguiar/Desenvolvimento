@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import * as moment from 'moment';
+import { Observable } from 'rxjs/Observable';
+import { Subscriber } from 'rxjs/Subscriber';
 
 class Mes {
   titulo: string;
@@ -9,6 +11,7 @@ class Mes {
     this.ativo = ativo;
   }
 }
+
 
 class Atributo {
   chave: string;
@@ -29,35 +32,73 @@ class Atributo {
 export class AppComponent {
   title = 'app';
   lista = [];
+  listaporacao = [];
   acoes = [];
   datas = [ ];
+  
   // datas = [ new Mes('teste', true), new Mes('teste2', false) ];
 
   public changeListener(files: FileList) {
-    moment.locale('pt-br');
-    // console.log(files);
-    if (files && files.length > 0) {
-       for (let index = 0; index < files.length; index++) {
 
-         const file: File = files.item(index);
-         const reader: FileReader = new FileReader();
-         reader.readAsText(file, 'ISO-8859-1');
-         reader.onload = (e) => {
+    this.leiaArquivos(files).subscribe(
+      x => {},
+      x => {}, 
+      ()=> {
+        this.processe();
+        console.log(this.listaporacao);
+    })
+    
+  }
+
+  leiaArquivos(files: FileList) {
+    return new Observable<any>(observer => {
+      moment.locale('pt-br');
+      // console.log(files);
+      if (files && files.length > 0) {
+          this.leiaArquivo(files, 0, observer)
+          console.log(this.listaporacao);
+      } else {
+        observer.complete();        
+      }        
+    });
+  }
+
+  leiaArquivo(files, index, observer: Subscriber<any>) {
+    if (index >= files.length) {
+      observer.complete();
+    } else {
+      const file: File = files.item(index);
+      const reader: FileReader = new FileReader();
+      reader.readAsText(file, 'ISO-8859-1');
+      const that = this;
+      reader.onload = (e) => {
             const csv = reader.result;
-            this.lista.push(this.csvJSON(csv));
-            this.obtenhaAtributo('Ativo', this.acoes);
-
-            this.obtenhaAtributo('Atualizado em', this.datas, (x) => {
-               const data = moment(x.substr(0, 10) , 'DD/MM/YYYY');
-               const mes = new Mes(data.format('MMMM/YYYY'), index === 0);
-               return new Atributo(mes.titulo, mes);
-            });
-
-            console.log(this.datas);
-         };
+            index +=1;
+            this.lista.push(that.csvJSON(csv));
+            this.leiaArquivo(files, index, observer);
+        };
       }
-    }
+  }
 
+  processe () {
+    const ATIVO = "Ativo";
+    const DATA = "Atualizado em";
+    const input =  this.lista;
+    
+    for (let i = 0; i < input.length; i++) {        
+        const item =  JSON.parse(input[i])[0];
+        
+        let listaDeOperacoes: any[] = this.listaporacao[ATIVO];
+
+        if (!listaDeOperacoes) 
+        {
+          listaDeOperacoes = [];
+          const elemento = { ATIVO: listaDeOperacoes };
+          this.listaporacao.push(elemento);          
+        }
+        listaDeOperacoes.push("teste 2");
+        /// listaDeOperacoes.push(item);
+    }
   }
 
   obtenhaAtributo(key, uniqueList, obtenhaValor = (x) => new Atributo(x, x) ) {

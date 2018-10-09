@@ -6,21 +6,7 @@
           <a *ngFor="let item of datas; let i = index" class="dropdown-item" href="#">{{ item.valor.titulo }}</a>          
         </div>
 </div>
-
-<div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a href="#">HTML</a></li>
-          <li><a href="#">CSS</a></li>
-          <li><a href="#">JavaScript</a></li>
-        </ul>
-      </div>
 <input type="file" class="upload" (change)="changeListener($event.target.files)" multiple accept=".csv">
+
 <br>
-{{ acoes | json }}
-<br>
-<!-- {{ datas | json }} -->
-<br>
-{{lista | json}}
-<br>
+{{ listaporacao | json }}
