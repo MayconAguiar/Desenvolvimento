@@ -2,7 +2,7 @@ import { Observable } from "rxjs/Observable";
 import { Subscriber } from "rxjs/Subscriber";
 
 export class Arquivos {
-    private lista;
+    private lista = [];
     
     constructor() {        
     }

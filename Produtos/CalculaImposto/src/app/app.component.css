@@ -24,3 +24,13 @@ font-weight: bold;
    color: white;
 }
 
+.card {
+    float: left;
+    padding: 2px;
+}
+
+.cards {
+    padding-top: 10px;
+    float: left;
+    width: 100%;
+}

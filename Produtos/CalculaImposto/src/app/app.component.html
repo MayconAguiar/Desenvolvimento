@@ -6,8 +6,8 @@
   </button>
 </div>
 
-<div *ngIf="keys != ''" class="subitem item2">
-  <button *ngFor="let item of keys; let i = index" type="button" class="btn btn-outline-secondary mr-2" 
+<div *ngIf="acoes != ''" class="subitem item2">
+  <button *ngFor="let item of acoes; let i = index" type="button" class="btn btn-outline-secondary mr-2" 
       (click)="selecionaAcao($event.srcElement.value)" [class.selecionado]="acaoSelecionada==item"  placement="button" value="{{item}}">
       {{ item }}
   </button>
@@ -30,8 +30,24 @@
   </div>
 </div> -->
 
-<div class="item">
+<!-- <div class="item">
   <h1>Lista Filtrada</h1>
-  {{ listaDeOperacaoFiltrada | json }}
+  {{ listaDeOperacao | json }}
 </div>
-  
+
+<div *ngFor="let item of acoes; let i = index">
+
+</div> -->
+<div class="cards">
+  <div *ngFor="let item of listaDeOperacao; let i = index" class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ item.empresa }}</h5>
+      <div class="card-text"> {{ item.natureza }}</div>
+      <div class="card-text">Quantidade: {{ item.quantidade }}</div>
+      <div class="card-text">Preço: {{ item.preco }}</div>
+      <div class="card-text">Data: {{ item.Data() }}</div>
+      <div class="card-text">MêsReferencia: {{ item.MesAno() }}</div>
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+  </div>
+</div>

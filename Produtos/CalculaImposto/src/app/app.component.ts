@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
+import { Operacoes } from './operacoes';
 
 class Mes {
   titulo: string;
@@ -31,63 +32,28 @@ class Atributo {
 
 export class AppComponent {
   title = 'app';
-  lista = [];
-  listaDeOperacao = [];
-  keys = [];
-  acoes = [];
-  datas = [];
   dataSelecionada = '';
   acaoSelecionada = '';
-  ATIVO = 'Ativo';
-  DATA = 'Atualizado em';
+  listaDeOperacao = [];
+  datas = [];
+  acoes = [];
+  operacoes : Operacoes;
 
   listaDeOperacaoFiltrada = [];
 
   // datas = [ new Mes('teste', true), new Mes('teste2', false) ];
 
   public changeListener(files: FileList) {
-
-    const that = this;
-    this.leiaArquivos(files).subscribe(
-      x => {},
-      x => {},
-      () => {
-        that.listaDeOperacao = this.processe(this.listaDeOperacao, this.datas, this.lista);
-        this.keys = Object.keys(this.listaDeOperacao);
-        console.log(this.datas);
+    this.operacoes = new Operacoes(files);
+    this.operacoes.processe().subscribe(x => {
+      this.listaDeOperacao = x;
+      this.datas = this.operacoes.obtenhaDatas();
+      this.acoes = this.operacoes.obtenhaEmpresas();
     });
-
   }
 
   filtre() {
-    const listaAux = this.obtenhaListaDaAcaoSelecionada();
-    this.listaDeOperacaoFiltrada = [];
-    
-    for (let index = 0; index < listaAux.length; index++) {
-      const element = listaAux[index];
-      const dataElement = this.obtenhaDataFormatada(element[this.DATA]);
-      if (dataElement == this.dataSelecionada) {
-        this.listaDeOperacaoFiltrada.push(element);
-      }
-    }
-  }
-
-  obtenhaListaDaAcaoSelecionada() {
-    let listaAux = [];
-
-    if (this.acaoSelecionada ==='Todas') {
-      const chaves = Object.keys(this.listaDeOperacao);
-      for (let i = 0; i < chaves.length; i++) {
-        for (let j = 0; j < this.listaDeOperacao[chaves[i]].length; j++) {
-          const item = this.listaDeOperacao[chaves[i]][j];
-          listaAux.push(item);
-        }        
-      }
-    } else {
-      listaAux = this.listaDeOperacao[this.acaoSelecionada];
-    }
-    
-    return listaAux;
+    this.listaDeOperacao = this.operacoes.filtre(this.dataSelecionada, this.acaoSelecionada);
   }
 
   selecionaData(value) {
@@ -102,109 +68,4 @@ export class AppComponent {
   selecionaAcao(value) {
     this.acaoSelecionada = value;
   }
-
-  leiaArquivos(files: FileList) {
-    return new Observable<any>(observer => {
-      moment.locale('pt-br');
-      // console.log(files);
-      if (files && files.length > 0) {
-          this.leiaArquivo(files, 0, observer);
-          console.log(this.listaDeOperacao);
-      } else {
-        observer.complete();
-      }
-    });
-  }
-
-  leiaArquivo(files, index, observer: Subscriber<any>) {
-    if (index >= files.length) {
-      observer.complete();
-    } else {
-      const file: File = files.item(index);
-      const reader: FileReader = new FileReader();
-      reader.readAsText(file, 'ISO-8859-1');
-      const that = this;
-      reader.onload = (e) => {
-            const csv = reader.result;
-            index += 1;
-            this.lista.push(that.csvJSON(csv));
-            this.leiaArquivo(files, index, observer);
-        };
-      }
-  }
-
-  processe (operacoes, datas: any[], files) {
-    const input =  files;
-    // return [ {teste: 'teste'} ];
-    for (let i = 0; i < input.length; i++) {
-        const item =  JSON.parse(input[i])[0];
-        const nomeDoAtivo = item[this.ATIVO];
-        const data = this.obtenhaDataFormatada(item[this.DATA]);
-
-        if (datas.indexOf(data) === -1) {
-          datas.push(data);
-        }
-
-        let itens: any[] = operacoes[nomeDoAtivo];
-
-
-        if (!itens) {
-          itens = [];
-          operacoes[nomeDoAtivo] = itens;
-        }
-
-        itens.push(item);
-    }
-
-    return operacoes;
-  }
-
-  // keys(): Array<string> {
-  //   return Object.keys(this.listaDeOperacao);
-  // }
-
-  obtenhaAtributo(key, uniqueList, obtenhaValor = (x) => new Atributo(x, x) ) {
-    // const unique = {};
-    // const uniqueList = [];
-    const input =  this.lista;
-
-    for (let i = 0; i < input.length; i++) {
-        const item =  JSON.parse(input[i])[0];
-        const atributo = obtenhaValor(item[key]);
-
-        const existe = Object.keys(uniqueList).some(x => {
-            return uniqueList[x].chave === atributo.chave;
-        });
-
-        if (!existe) {
-          uniqueList.push(atributo);
-        }
-        // if (typeof unique[atributo.chave] === 'undefined') {
-        //   unique[atributo.chave] = '';
-        //   uniqueList.push(atributo);
-        // }
-    }
-    // return uniqueList;
-  }
-
-    // var csv is the CSV file with headers
-  csvJSON(csv) {
-      const lines = csv.split('\n');
-      const result = [];
-      const headers = lines[0].split(';');
-
-      for (let i = 1; i < lines.length; i++) {
-
-        const obj = {};
-        const currentline = lines[i].split(';');
-
-        for (let j = 0; j < headers.length; j++) {
-          obj[headers[j]] = currentline[j];
-        }
-
-        result.push(obj);
-
-      }
-      return JSON.stringify(result);
-    }
   }
