@@ -5,7 +5,7 @@ export class OperacaoFinalizada {
     public operacaoDeSaida: Operacao;
 
     constructor(operacaoDeEntrada: Operacao, operacaoDeSaida: Operacao) {
-        this.operacaoDeSaida = operacaoDeSaida;    
+        this.operacaoDeSaida = operacaoDeSaida;
         this.operacaoDeEntrada = operacaoDeEntrada;
     }
 }

@@ -1,8 +1,12 @@
 
-<div class="subitem">
+<div *ngIf="datas != ''" class="subitem">
   <button *ngFor="let item of datas; let i = index" type="button" class="btn btn-outline-secondary mr-2" 
       (click)="selecionaData($event.srcElement.value)" [class.selecionado]="dataSelecionada==item" placement="top" value="{{item}}">
       {{ item }}
+  </button>
+  <button type="button" class="btn btn-outline-secondary mr-2" 
+    (click)="selecionaData($event.srcElement.value)" [class.selecionado]="dataSelecionada=='Todos'"  placement="button" value="Todos">
+    Todos
   </button>
 </div>
 
@@ -16,7 +20,7 @@
   Todas
 </button>
 </div>
-<div *ngIf="acaoSelecionada !== '' && this.dataSelecionada !== ''" class="item">
+<div *ngIf="acaoSelecionada !== '' || this.dataSelecionada !== ''" class="item">
   <button type="button" class="btn" (click)="filtre()">Filtre</button>
 </div>
 
@@ -39,8 +43,8 @@
 
 </div> -->
 
-<div class="cards">
-  <h1>Operações</h1>
+<div *ngIf="listaDeOperacao.length > 0" class="cards">
+  <h5>Operações</h5>
   <div *ngFor="let item of listaDeOperacao; let i = index" class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">{{ item.empresa }}</h5>
@@ -55,16 +59,21 @@
   </div>
 </div>
 
-<div class="cards">
-    <h1>Operações Finalizadas </h1>
+<div *ngIf="listaDeOperacaoFinalizadas.length > 0" class="cards">
+    <div class="item">
+        <h5>Total de Venda: {{ valorTotalVenda }} </h5>
+      </div>
+    <h5>Operações Finalizadas </h5>
     <div *ngFor="let item of listaDeOperacaoFinalizadas; let i = index" class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">{{ item.operacaoDeEntrada.empresa }} *** Entrada ***</h5>
+        <div class="card-text">Natureza: {{ item.operacaoDeEntrada.natureza }}</div>
         <div class="card-text">Quantidade: {{ item.operacaoDeEntrada.quantidade }}</div>
         <div class="card-text">Preço: {{ item.operacaoDeEntrada.preco }}</div>
         <div class="card-text">Data: {{ item.operacaoDeEntrada.Data() }}</div>
         <div class="card-text">MêsReferencia: {{ item.operacaoDeEntrada.MesAno() }}</div>
         <h5 class="card-title">{{ item.operacaoDeSaida.empresa }} *** Saida ***</h5>
+        <div class="card-text">Natureza: {{ item.operacaoDeSaida.natureza }}</div>
         <div class="card-text">Quantidade: {{ item.operacaoDeSaida.quantidade }}</div>
         <div class="card-text">Preço: {{ item.operacaoDeSaida.preco }}</div>
         <div class="card-text">Data: {{ item.operacaoDeSaida.Data() }}</div>

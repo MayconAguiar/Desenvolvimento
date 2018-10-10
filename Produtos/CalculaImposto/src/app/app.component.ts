@@ -39,7 +39,8 @@ export class AppComponent {
   listaDeOperacaoFinalizadas = [];
   datas = [];
   acoes = [];
-  operacoes : Operacoes;
+  operacoes: Operacoes;
+  valorTotalVenda = 0;
 
   listaDeOperacaoFiltrada = [];
 
@@ -51,13 +52,17 @@ export class AppComponent {
       this.listaDeOperacao = x;
       this.datas = this.operacoes.obtenhaDatas();
       this.acoes = this.operacoes.obtenhaEmpresas();
-      const operacoesFinalizadas = new OperacoesFinalizadas(x);
-      operacoesFinalizadas.processe();
+      const item = this.operacoes.obtenhaOperacoesFinalizadas();
+      this.listaDeOperacaoFinalizadas = item.lista;
+      this.valorTotalVenda = item.valorDeVenda;
     });
   }
 
   filtre() {
-    this.listaDeOperacao = this.operacoes.filtre(this.dataSelecionada, this.acaoSelecionada);
+    const retorno = this.operacoes.filtre(this.dataSelecionada, this.acaoSelecionada);
+    this.listaDeOperacao = retorno.lista;
+    this.listaDeOperacaoFinalizadas = retorno.finalizadas;
+    this.valorTotalVenda = retorno.soma;
   }
 
   selecionaData(value) {
