@@ -1,6 +1,13 @@
 .item {
     float: left;
-    width: 100%;    
+    width: 100%;  
+    padding-top: 1%;  
+}
+
+.subitem {
+    float: left;
+    width: 50%;  
+    padding-top: 1%;  
 }
 
 .menu-desktop {

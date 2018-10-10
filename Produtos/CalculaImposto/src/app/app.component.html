@@ -1,29 +1,37 @@
 
-<div class="item">
+<div class="subitem">
   <button *ngFor="let item of datas; let i = index" type="button" class="btn btn-outline-secondary mr-2" 
-      (click)="selecionaData($event.srcElement.value)" [class.selecionado]="dataSelecionada==item" placement="top" ngbTooltip="Escolha um mês" value="{{item}}">
+      (click)="selecionaData($event.srcElement.value)" [class.selecionado]="dataSelecionada==item" placement="top" value="{{item}}">
       {{ item }}
   </button>
 </div>
 
-<div class="item item2">
+<div *ngIf="keys != ''" class="subitem item2">
   <button *ngFor="let item of keys; let i = index" type="button" class="btn btn-outline-secondary mr-2" 
-      (click)="selecionaAcao($event.srcElement.value)" [class.selecionado]="acaoSelecionada==item"  placement="button" ngbTooltip="Escolha um mês" value="{{item}}">
+      (click)="selecionaAcao($event.srcElement.value)" [class.selecionado]="acaoSelecionada==item"  placement="button" value="{{item}}">
       {{ item }}
   </button>
+  <button type="button" class="btn btn-outline-secondary mr-2" 
+  (click)="selecionaAcao($event.srcElement.value)" [class.selecionado]="acaoSelecionada=='Todas'"  placement="button" value="Todas">
+  Todas
+</button>
+</div>
+<div *ngIf="acaoSelecionada !== '' && this.dataSelecionada !== ''" class="item">
+  <button type="button" class="btn" (click)="filtre()">Filtre</button>
 </div>
 
 <div class="item">
   <input type="file" class="upload" (change)="changeListener($event.target.files)" multiple accept=".csv">
 </div>
 
-<div class="item">
+<!-- <div class="item">
   <div *ngFor="let item of keys;">
       <div>{{item}}:{{listaDeOperacao[item] | json}}</div>
   </div>
-</div>
+</div> -->
 
 <div class="item">
-  {{ datas | json }}
+  <h1>Lista Filtrada</h1>
+  {{ listaDeOperacaoFiltrada | json }}
 </div>
   

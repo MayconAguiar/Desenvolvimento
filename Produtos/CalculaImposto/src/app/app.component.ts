@@ -38,6 +38,8 @@ export class AppComponent {
   datas = [];
   dataSelecionada = '';
   acaoSelecionada = '';
+  ATIVO = 'Ativo';
+  DATA = 'Atualizado em';
 
   listaDeOperacaoFiltrada = [];
 
@@ -57,13 +59,44 @@ export class AppComponent {
 
   }
 
+  filtre() {
+    const listaAux = this.obtenhaListaDaAcaoSelecionada();
+    this.listaDeOperacaoFiltrada = [];
+    
+    for (let index = 0; index < listaAux.length; index++) {
+      const element = listaAux[index];
+      const dataElement = this.obtenhaDataFormatada(element[this.DATA]);
+      if (dataElement == this.dataSelecionada) {
+        this.listaDeOperacaoFiltrada.push(element);
+      }
+    }
+  }
+
+  obtenhaListaDaAcaoSelecionada() {
+    let listaAux = [];
+
+    if (this.acaoSelecionada ==='Todas') {
+      const chaves = Object.keys(this.listaDeOperacao);
+      for (let i = 0; i < chaves.length; i++) {
+        for (let j = 0; j < this.listaDeOperacao[chaves[i]].length; j++) {
+          const item = this.listaDeOperacao[chaves[i]][j];
+          listaAux.push(item);
+        }        
+      }
+    } else {
+      listaAux = this.listaDeOperacao[this.acaoSelecionada];
+    }
+    
+    return listaAux;
+  }
+
   selecionaData(value) {
     this.dataSelecionada = value;
-    debugger;
-    this.listaDeOperacao.filter(function(el) {
-      console.log(el);
-      return true;
-    });
+  }
+
+  obtenhaDataFormatada(value){
+    moment.locale('pt-br');
+    return moment(value.substr(0, 10) , 'DD/MM/YYYY').format('MMMM/YYYY')
   }
 
   selecionaAcao(value) {
@@ -101,15 +134,12 @@ export class AppComponent {
   }
 
   processe (operacoes, datas: any[], files) {
-    moment.locale('pt-br');
-    const ATIVO = 'Ativo';
-    const DATA = 'Atualizado em';
     const input =  files;
     // return [ {teste: 'teste'} ];
     for (let i = 0; i < input.length; i++) {
         const item =  JSON.parse(input[i])[0];
-        const nomeDoAtivo = item[ATIVO];
-        const data = moment(item[DATA].substr(0, 10) , 'DD/MM/YYYY').format('MMMM/YYYY');
+        const nomeDoAtivo = item[this.ATIVO];
+        const data = this.obtenhaDataFormatada(item[this.DATA]);
 
         if (datas.indexOf(data) === -1) {
           datas.push(data);
