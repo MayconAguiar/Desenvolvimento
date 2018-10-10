@@ -1,6 +1,7 @@
 import * as moment from 'moment';
 
 export class Operacao {
+    codigo: number;
     empresa: string;
     data: moment.Moment;
     quantidade: number;

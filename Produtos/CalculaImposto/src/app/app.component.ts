@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Operacoes } from './operacoes';
+import { OperacoesFinalizadas } from './operacoesFinalizadas';
 
 class Mes {
   titulo: string;
@@ -35,6 +36,7 @@ export class AppComponent {
   dataSelecionada = '';
   acaoSelecionada = '';
   listaDeOperacao = [];
+  listaDeOperacaoFinalizadas = [];
   datas = [];
   acoes = [];
   operacoes : Operacoes;
@@ -49,6 +51,8 @@ export class AppComponent {
       this.listaDeOperacao = x;
       this.datas = this.operacoes.obtenhaDatas();
       this.acoes = this.operacoes.obtenhaEmpresas();
+      const operacoesFinalizadas = new OperacoesFinalizadas(x);
+      operacoesFinalizadas.processe();
     });
   }
 

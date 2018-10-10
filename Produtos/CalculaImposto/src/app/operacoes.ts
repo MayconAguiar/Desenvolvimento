@@ -3,13 +3,14 @@ import * as moment from 'moment';
 import { Subscriber } from "rxjs/Subscriber";
 import { Arquivos } from "./arquivos";
 import { Operacao } from "./operacao";
+import { debug } from "util";
 
 export class Operacoes {
     
     private files: FileList;
     private arquivos: Arquivos;
     private listaItensCsv: any[];
-    private operacoes = [];
+    private operacoes: Operacao[] = [];
     
     //campos
     private ATIVO = 'Ativo';
@@ -17,6 +18,7 @@ export class Operacoes {
     private QUANTIDADE = 'Qtd. Executada';
     private PRECO = 'Preço Médio';
     private NATUREZA = 'Natureza';
+    private CODIGO = 'Código';
 
     constructor(files: FileList) {
         this.files = files;
@@ -50,8 +52,7 @@ export class Operacoes {
         return this.obtenhaListaUnica(x => x.MesAno());
     }
 
-    public filtre(data, empresa) {
-        debugger;
+    public filtre(data, empresa) {        
         let lista = this.filtreinterno(x => x.MesAno(), data, this.operacoes);
         return empresa ==='Todas' ? lista : this.filtreinterno(x => x.empresa, empresa, lista);
     }
@@ -98,9 +99,12 @@ export class Operacoes {
             operacao.quantidade = item[this.QUANTIDADE];
             operacao.preco = item[this.PRECO];
             operacao.natureza = item[this.NATUREZA];
+            operacao.codigo = item[this.CODIGO];
 
             this.operacoes.push(operacao);
         }
+
+        this.operacoes = this.operacoes.sort((a, b) => a.codigo < b.codigo ? -1 : 1);
       }
 
       private obtenhaDataFormatada(value){
