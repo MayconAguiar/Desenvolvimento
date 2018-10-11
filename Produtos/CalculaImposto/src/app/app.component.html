@@ -24,10 +24,21 @@
   <button type="button" class="btn btn-primary" (click)="filtre()">Filtre</button>
 </div>
 
+<br>
 <div class="item">
-  <input type="file" class="upload" (change)="changeListener($event.target.files)" multiple accept=".csv">
+<div class="float-sm-left"><span class="btn btn-primary btn-file">
+    Arquivos ... <input type="file" 
+    (change)="changeListener($event.target.files)" multiple accept=".csv">
+  </span>
+  </div>
+<div class="float-sm-left px-2"><h5>Exibir operações...</h5></div>
+<div class="float-sm-left">
+  <label class="switch">
+    <input type="checkbox"(change)="exibirOperacoes($event.target.checked)">
+    <span class="slider round"></span>
+  </label>
 </div>
-
+</div>
 <!-- <label for="file-upload" class="custom-file-upload">
   Adicione os csvs
 </label>
@@ -49,7 +60,7 @@
 
 </div> -->
 
-<div *ngIf="listaDeOperacaoFiltrada.length > 0" class="cards">
+<div *ngIf="listaDeOperacaoFiltrada.length > 0 && exibirOperacoes" class="cards">
   <h5>Operações</h5>
   <div *ngFor="let item of listaDeOperacaoFiltrada; let i = index" class="card" style="width: 18rem;">
     <div class="card-body">

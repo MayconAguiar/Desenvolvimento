@@ -41,6 +41,7 @@ export class AppComponent {
   acoes = [];
   operacoes : Operacoes;
   valorTotalVenda = 0;
+  exibirOperacoes = false;
 
   listaDeOperacaoFiltrada = [];
 
@@ -63,7 +64,9 @@ export class AppComponent {
       this.valorTotalVenda = operacoesFinalizadas.valorDeVenda;
     });
   }
-
+  ExibirOperacoes(exibir){
+    this.exibirOperacoes = exibir;
+  }
   filtre() {
     const resultado = this.operacoes.filtre(this.dataSelecionada, this.acaoSelecionada);
     this.listaDeOperacaoFiltrada = resultado.lista;
