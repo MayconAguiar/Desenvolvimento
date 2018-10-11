@@ -37,12 +37,20 @@ font-weight: bold;
 
 .lucroouprejuizo {
     padding-top: 10px;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
 }
 
 .lucro {
-    background-color: green;
+    background-color: #4eac25;
 }
 
 .prejuizo {
-    background-color: red;
+    background-color: #e26262;
+}
+
+h5{
+    font-size: 1rem;
 }

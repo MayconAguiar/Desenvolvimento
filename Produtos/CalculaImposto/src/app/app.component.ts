@@ -48,13 +48,17 @@ export class AppComponent {
 
   public changeListener(files: FileList) {
     this.operacoes = new Operacoes(files);
+    const that = this;
     this.operacoes.processe().subscribe(x => {
       this.listaDeOperacaoFiltrada = x;
       this.datas = this.operacoes.obtenhaDatas();
       this.acoes = this.operacoes.obtenhaEmpresas();
       
+      
+      // this.dataSelecionada = this.datas[this.datas.length - 1];
+      // this.acaoSelecionada = "Todas";
+         
       const operacoesFinalizadas = this.operacoes.obtenhaOperacoesFinalizadas();
-      console.log(operacoesFinalizadas);
       this.listaDeOperacaoFinalizadas = operacoesFinalizadas.lista;
       this.valorTotalVenda = operacoesFinalizadas.valorDeVenda;
     });

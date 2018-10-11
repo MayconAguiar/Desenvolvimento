@@ -21,12 +21,18 @@
 </button>
 </div>
 <div *ngIf="acaoSelecionada !== '' || this.dataSelecionada !== ''" class="item">
-  <button type="button" class="btn" (click)="filtre()">Filtre</button>
+  <button type="button" class="btn btn-primary" (click)="filtre()">Filtre</button>
 </div>
 
 <div class="item">
   <input type="file" class="upload" (change)="changeListener($event.target.files)" multiple accept=".csv">
 </div>
+
+<!-- <label for="file-upload" class="custom-file-upload">
+  Adicione os csvs
+</label>
+<input id="file-upload" type="file" (change)="changeListener($event.target.files)" multiple accept=".csv"> -->
+
 
 <!-- <div class="item">
   <div *ngFor="let item of keys;">
@@ -79,7 +85,9 @@
         <div class="card-text">Preço: {{ item.operacaoDeSaida.preco|number:'1.2-2' }}</div>
         <div class="card-text">Data: {{ item.operacaoDeSaida.Data() }}</div>
         <div class="card-text">MêsReferencia: {{ item.operacaoDeSaida.MesAno() }}</div>
-        <div class="card-text lucroouprejuizo" [style.lucro]="item.lucroouprejuizo() > 0">Resultado: {{ item.lucroouprejuizo() |number:'1.2-2' }}</div>
+        <div class="card-text lucroouprejuizo" 
+        [class.lucro]="item.lucroouprejuizo() >= 0"
+        [class.prejuizo]="item.lucroouprejuizo() < 0"><span>Resultado: {{ item.lucroouprejuizo() |number:'1.2-2' }}</span></div>
 
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
