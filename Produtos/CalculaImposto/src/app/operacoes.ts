@@ -129,7 +129,6 @@ export class Operacoes {
                 this.operacoes.push(operacao);
             }
         }
-        
         this.operacoes = this.operacoes.sort((a, b) => a.codigo < b.codigo ? -1 : 1);
       }
 

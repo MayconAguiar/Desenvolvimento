@@ -1,4 +1,25 @@
+<div class="controles mw-100 float-sm-left">
+    <div class="float-sm-left mw-25 h-100 px-2">
+        <span class="btn btn-primary btn-file h-100">
+            Arquivos ... <input type="file" 
+            (change)="changeListener($event.target.files)" multiple accept=".csv">
+          </span>
+    </div>
+  
+<div class="float-sm-left mw-25 border px-2 h-100">
+  <div class="float-sm-left"><h5>Exibir operações...</h5></div>
+  <div class="float-sm-left">
+    <label class="switch">
+      <input type="checkbox"(change)="exibirOperacoes($event.target.checked)">
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
+</div>
 
+<br>
+
+<div class="item">
 <div *ngIf="datas != ''" class="subitem">
   <button *ngFor="let item of datas; let i = index" type="button" class="btn btn-outline-secondary mr-2" 
       (click)="selecionaData($event.srcElement.value)" [class.selecionado]="dataSelecionada==item" placement="top" value="{{item}}">
@@ -23,22 +44,9 @@
 <div *ngIf="acaoSelecionada !== '' || this.dataSelecionada !== ''" class="item">
   <button type="button" class="btn btn-primary" (click)="filtre()">Filtre</button>
 </div>
-
+</div>
 <br>
-<div class="item">
-<div class="float-sm-left"><span class="btn btn-primary btn-file">
-    Arquivos ... <input type="file" 
-    (change)="changeListener($event.target.files)" multiple accept=".csv">
-  </span>
-  </div>
-<div class="float-sm-left px-2"><h5>Exibir operações...</h5></div>
-<div class="float-sm-left">
-  <label class="switch">
-    <input type="checkbox"(change)="exibirOperacoes($event.target.checked)">
-    <span class="slider round"></span>
-  </label>
-</div>
-</div>
+
 <!-- <label for="file-upload" class="custom-file-upload">
   Adicione os csvs
 </label>
