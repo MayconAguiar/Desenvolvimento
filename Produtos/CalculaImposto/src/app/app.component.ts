@@ -39,7 +39,7 @@ export class AppComponent {
   listaDeOperacaoFinalizadas = [];
   datas = [];
   acoes = [];
-  operacoes: Operacoes;
+  operacoes : Operacoes;
   valorTotalVenda = 0;
 
   listaDeOperacaoFiltrada = [];
@@ -49,20 +49,22 @@ export class AppComponent {
   public changeListener(files: FileList) {
     this.operacoes = new Operacoes(files);
     this.operacoes.processe().subscribe(x => {
-      this.listaDeOperacao = x;
+      this.listaDeOperacaoFiltrada = x;
       this.datas = this.operacoes.obtenhaDatas();
       this.acoes = this.operacoes.obtenhaEmpresas();
-      const item = this.operacoes.obtenhaOperacoesFinalizadas();
-      this.listaDeOperacaoFinalizadas = item.lista;
-      this.valorTotalVenda = item.valorDeVenda;
+      
+      const operacoesFinalizadas = this.operacoes.obtenhaOperacoesFinalizadas();
+      console.log(operacoesFinalizadas);
+      this.listaDeOperacaoFinalizadas = operacoesFinalizadas.lista;
+      this.valorTotalVenda = operacoesFinalizadas.valorDeVenda;
     });
   }
 
   filtre() {
-    const retorno = this.operacoes.filtre(this.dataSelecionada, this.acaoSelecionada);
-    this.listaDeOperacao = retorno.lista;
-    this.listaDeOperacaoFinalizadas = retorno.finalizadas;
-    this.valorTotalVenda = retorno.soma;
+    const resultado = this.operacoes.filtre(this.dataSelecionada, this.acaoSelecionada);
+    this.listaDeOperacaoFiltrada = resultado.lista;
+    this.valorTotalVenda = resultado.soma;
+    this.listaDeOperacaoFinalizadas = resultado.finalizadas;
   }
 
   selecionaData(value) {

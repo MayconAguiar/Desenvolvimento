@@ -4,6 +4,7 @@ import { Subscriber } from 'rxjs/Subscriber';
 import { Arquivos } from './arquivos';
 import { Operacao } from './operacao';
 import { OperacoesFinalizadas } from './operacoesFinalizadas';
+import { OperacaoFinalizada } from './operacaoFinalizada';
 
 export class Operacoes {
 
@@ -60,10 +61,25 @@ export class Operacoes {
     }
 
     public filtre(data, empresa) {
-        let lista = data === 'Todos' ? this.operacoes : this.filtreinterno(x => x.MesAno(), data, this.operacoes);
-        lista = empresa === 'Todas' ? lista : this.filtreinterno(x => x.empresa, empresa, lista);
+        // let lista = data === 'Todos' ? this.operacoes : this.filtreinterno(x => x.MesAno(), data, this.operacoes);
+        // lista = empresa === 'Todas' ? lista : this.filtreinterno(x => x.empresa, empresa, lista);
+        
         const finalizadas = this.operacoesFinalizadas.filtre(data, empresa);
+        let lista = this.obtenhaOperacoesFiltradas(finalizadas);
         return { lista: lista, finalizadas: finalizadas, soma: this.operacoesFinalizadas.obtenhaSoma(finalizadas) };
+    }
+
+    public obtenhaOperacoesFiltradas(lista: OperacaoFinalizada[]) {
+        let novaLista = [];
+        for (let index = 0; index < lista.length; index++) {
+            const element = lista[index];
+            novaLista.push(element.operacaoDeEntrada);
+            novaLista.push(element.operacaoDeSaida);
+        }
+
+        novaLista = novaLista.sort((a, b) => a.codigo < b.codigo ? -1 : 1);
+
+        return novaLista;
     }
 
     private filtreinterno(atributoDaOperacao, valorDoFiltro, array){
@@ -113,6 +129,7 @@ export class Operacoes {
                 this.operacoes.push(operacao);
             }
         }
+        
         this.operacoes = this.operacoes.sort((a, b) => a.codigo < b.codigo ? -1 : 1);
       }
 

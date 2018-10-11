@@ -34,3 +34,15 @@ font-weight: bold;
     float: left;
     width: 100%;
 }
+
+.lucroouprejuizo {
+    padding-top: 10px;
+}
+
+.lucro {
+    background-color: green;
+}
+
+.prejuizo {
+    background-color: red;
+}

@@ -14,6 +14,7 @@ export class OperacoesFinalizadas{
     }
 
     processe()  {
+        
         for (let index = 0; index < this.operacoes.length; index++) {
             const element = this.operacoes[index];
             const entrada = this.entradas.find(x => x.empresa === element.empresa);
@@ -78,7 +79,7 @@ export class OperacoesFinalizadas{
     }
 
 
-    retireElementoFinalizado(element: Operacao) {
+    retireElementoFinalizado(element: Operacao) {        
         const entradas = this.entradas.filter(x => x.empresa === element.empresa);
         const saidas = this.saidas.filter(x => x.empresa === element.empresa);
         const saidasFinalizadas = [];
@@ -95,22 +96,23 @@ export class OperacoesFinalizadas{
                 if (soma === 0 )  {
                     const operacaoFinalizada = new OperacaoFinalizada(entrada, saida);
                     this.operacoesFinalizadas.push(operacaoFinalizada);
-                    entradasFinalizadas.push(i);
-                    saidasFinalizadas.push(j);
-                    continue;
+                    entradasFinalizadas.push(entrada.codigo);
+                    saidasFinalizadas.push(saida.codigo);
+                    break;
                 }
             }
 
-            this.remove(saidasFinalizadas,  saidas);
+            this.remove(saidasFinalizadas, this.saidas);
         }
 
-        this.remove(entradasFinalizadas, entradas);
+        this.remove(entradasFinalizadas, this.entradas);
     }
 
-    remove(listaIndices, lista) {
-        for (let index = 0; index < listaIndices.length; index++) {
-            const element = listaIndices[index];
-            lista.splice(element, 1);
+    remove(listaDeCodigos: any[], lista: Operacao[]) {
+        for (let index = 0; index < listaDeCodigos.length; index++) {
+            const index = lista.findIndex(x => x.codigo == listaDeCodigos[index])            
+            lista = lista.splice(index, 1);
         }
+        listaDeCodigos = [];
     }
 }
