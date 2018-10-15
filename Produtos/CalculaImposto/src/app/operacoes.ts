@@ -7,6 +7,7 @@ import { OperacoesFinalizadas } from './operacoesFinalizadas';
 import { OperacaoFinalizada } from './operacaoFinalizada';
 import { GerenciadorDeResultados } from './resultados/gerenciadorDeResultados';
 import { Taxas } from './resultados/taxas';
+import { ArquivosPDF } from './arquivosPDF';
 
 export class Operacoes {
 
@@ -30,8 +31,20 @@ export class Operacoes {
 
     public processe() {
         return new Observable<any>(observer => {
-            this.arquivos = new Arquivos();
-            this.arquivos.obtenhaLista(this.files)
+            // this.arquivos = new Arquivos();
+            // this.arquivos.obtenhaLista(this.files)
+            // .subscribe(x => {
+            //     this.listaItensCsv = x;
+            // },
+            // err => { },
+            // () => {
+            //     this.processeInterno();
+            //     observer.next(this.operacoes);
+            //     observer.complete();
+            // });
+            const arq = new ArquivosPDF();
+
+            arq.obtenhaLista(this.files)
             .subscribe(x => {
                 this.listaItensCsv = x;
             },

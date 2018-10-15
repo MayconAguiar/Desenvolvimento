@@ -8,8 +8,7 @@ export class Arquivos {
     }
 
     obtenhaLista(files: FileList) {
-        return new Observable<any>(observer => 
-            this.leiaArquivo(files, 0, observer));
+        return new Observable<any>(observer => this.leiaArquivo(files, 0, observer));
     }
 
     private leiaArquivo(files, index, observer: Subscriber<any>) {

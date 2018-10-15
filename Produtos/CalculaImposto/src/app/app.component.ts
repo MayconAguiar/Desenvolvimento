@@ -41,8 +41,8 @@ export class AppComponent {
   listaDeOperacaoFinalizadas = [];
   datas = [];
   acoes = [];
-  operacoes : Operacoes;
-  resultado : Resultado;
+  operacoes: Operacoes;
+  resultado: Resultado;
   exibirOperacoes = false;
 
   listaDeOperacaoFiltrada = [];
@@ -56,17 +56,16 @@ export class AppComponent {
       this.listaDeOperacaoFiltrada = x;
       this.datas = this.operacoes.obtenhaDatas();
       this.acoes = this.operacoes.obtenhaEmpresas();
-      
-      
+
       // this.dataSelecionada = this.datas[this.datas.length - 1];
-      this.acaoSelecionada = "Todas";
-         
+      this.acaoSelecionada = 'Todas';
+
       const operacoesFinalizadas = this.operacoes.obtenhaOperacoesFinalizadas();
       this.listaDeOperacaoFinalizadas = operacoesFinalizadas.lista;
       this.resultado = new GerenciadorDeResultados(operacoesFinalizadas.lista).obtenha();
     });
   }
-  ExibirOperacoes(exibir){
+  ExibirOperacoes(exibir) {
     this.exibirOperacoes = exibir;
   }
   filtre() {
