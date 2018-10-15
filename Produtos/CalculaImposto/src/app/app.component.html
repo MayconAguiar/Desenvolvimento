@@ -15,6 +15,11 @@
     </label>
   </div>
 </div>
+
+<div *ngIf="acaoSelecionada !== '' || this.dataSelecionada !== ''" class="itemBotao">
+  <button type="button" class="btn btn-primary" (click)="filtre()">Filtre</button>
+</div>
+
 </div>
 
 <br>
@@ -41,9 +46,7 @@
   Todas
 </button>
 </div>
-<div *ngIf="acaoSelecionada !== '' || this.dataSelecionada !== ''" class="item">
-  <button type="button" class="btn btn-primary" (click)="filtre()">Filtre</button>
-</div>
+
 </div>
 <br>
 
@@ -85,14 +88,24 @@
 </div>
 
 <div *ngIf="listaDeOperacaoFinalizadas.length > 0" class="cards">
-    <div class="item">
+    <div class="item resultado">
         <!-- <h5>Total de Venda: {{ valorTotalVenda | number:2 }} </h5> -->
-        <h5>Total de Venda: {{ valorTotalVenda|number:'1.2-2' }} </h5>
+        <div class="itemResultado comum"><h5>Total de Venda: {{ resultado.totalVendido|number:'1.2-2' }} </h5></div>
+        <div class="itemResultado lucro" *ngIf="resultado.resultado > 0"><h5> Lucro: {{ resultado.resultado|number:'1.2-2' }} </h5></div>
+        <div class="itemResultado prejuizo" *ngIf="resultado.resultado < 0"><h5> Prejuizo: {{ resultado.resultado|number:'1.2-2' }} </h5></div>
       </div>
+    
     <h5>Operações Finalizadas </h5>
     <div *ngFor="let item of listaDeOperacaoFinalizadas; let i = index" class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">{{ item.operacaoDeEntrada.empresa }} *** Entrada ***</h5>
+        <h5 class="card-text">Retido na Fonte: {{ item.impostoDeRendaRetidoNaFonte()|number:'1.2-2' }} </h5>
+        <h5 class="card-text">Taxas de Entrada: {{ item.operacaoDeEntrada.taxas.total|number:'1.2-2' }} </h5>
+        <h5 class="card-text">Taxas de Saida: {{ item.operacaoDeSaida.taxas.total|number:'1.2-2' }} </h5>
+        <div class="card-text lucroouprejuizo" 
+        [class.lucro]="item.lucroouprejuizo() >= 0"
+        [class.prejuizo]="item.lucroouprejuizo() < 0"><span>Resultado: {{ item.lucroouprejuizo() |number:'1.2-2' }}</span></div>
+
         <div class="card-text">Natureza: {{ item.operacaoDeEntrada.natureza }}</div>
         <div class="card-text">Quantidade: {{ item.operacaoDeEntrada.quantidade }}</div>
         <div class="card-text">Preço: {{ item.operacaoDeEntrada.preco|number:'1.2-2' }}</div>
@@ -104,9 +117,7 @@
         <div class="card-text">Preço: {{ item.operacaoDeSaida.preco|number:'1.2-2' }}</div>
         <div class="card-text">Data: {{ item.operacaoDeSaida.Data() }}</div>
         <div class="card-text">MêsReferencia: {{ item.operacaoDeSaida.MesAno() }}</div>
-        <div class="card-text lucroouprejuizo" 
-        [class.lucro]="item.lucroouprejuizo() >= 0"
-        [class.prejuizo]="item.lucroouprejuizo() < 0"><span>Resultado: {{ item.lucroouprejuizo() |number:'1.2-2' }}</span></div>
+        
 
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>

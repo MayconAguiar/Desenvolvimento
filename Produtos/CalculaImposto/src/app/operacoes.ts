@@ -5,6 +5,8 @@ import { Arquivos } from './arquivos';
 import { Operacao } from './operacao';
 import { OperacoesFinalizadas } from './operacoesFinalizadas';
 import { OperacaoFinalizada } from './operacaoFinalizada';
+import { GerenciadorDeResultados } from './resultados/gerenciadorDeResultados';
+import { Taxas } from './resultados/taxas';
 
 export class Operacoes {
 
@@ -61,12 +63,11 @@ export class Operacoes {
     }
 
     public filtre(data, empresa) {
-        // let lista = data === 'Todos' ? this.operacoes : this.filtreinterno(x => x.MesAno(), data, this.operacoes);
-        // lista = empresa === 'Todas' ? lista : this.filtreinterno(x => x.empresa, empresa, lista);
-        
         const finalizadas = this.operacoesFinalizadas.filtre(data, empresa);
         let lista = this.obtenhaOperacoesFiltradas(finalizadas);
-        return { lista: lista, finalizadas: finalizadas, soma: this.operacoesFinalizadas.obtenhaSoma(finalizadas) };
+        const resultado = new GerenciadorDeResultados(finalizadas).obtenha();
+        // return { lista: lista, finalizadas: finalizadas, resultado: this.operacoesFinalizadas.obtenhaSoma(finalizadas) };
+        return { lista: lista, finalizadas: finalizadas, resultado: resultado };
     }
 
     public obtenhaOperacoesFiltradas(lista: OperacaoFinalizada[]) {
@@ -125,6 +126,7 @@ export class Operacoes {
                 operacao.preco = item[this.PRECO];
                 operacao.natureza = item[this.NATUREZA];
                 operacao.codigo = item[this.CODIGO];
+                operacao.taxas = new Taxas(operacao);
 
                 this.operacoes.push(operacao);
             }

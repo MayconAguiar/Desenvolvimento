@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import { Taxas } from './resultados/taxas';
 
 export class Operacao {
     codigo: number;
@@ -7,6 +8,8 @@ export class Operacao {
     quantidade: number;
     preco: number;
     natureza: string;
+    taxas: Taxas;
+    
 
     public Data() {
         return this.data.format('DD/MM/YYYY');

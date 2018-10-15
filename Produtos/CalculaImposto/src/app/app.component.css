@@ -1,3 +1,15 @@
+.resultado {
+    padding-bottom: 8px;
+}
+.itemResultado {
+    float: left;
+    width: 250px;
+    /* border-radius: 10px; */
+    border: 1px solid;
+    padding: 3px;
+    text-align: center;
+}
+
 .controles {
     height: 50px;
 }
@@ -5,6 +17,16 @@
     float: left;
     width: 100%;  
     padding-top: 1%;  
+}
+
+.itemBotao {
+    float: left;
+    padding-left: 8px;
+    
+}
+.itemBotao button {    
+    width: 226px;
+    height: 50px;
 }
 
 .subitem {
@@ -44,6 +66,10 @@ font-weight: bold;
     border-radius: 10px;
     text-align: center;
     font-weight: 600;
+}
+
+.comum {
+    background-color: grey;
 }
 
 .lucro {

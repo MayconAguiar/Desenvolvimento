@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Operacoes } from './operacoes';
 import { OperacoesFinalizadas } from './operacoesFinalizadas';
+import { Resultado } from './resultados/resultado';
+import { GerenciadorDeResultados } from './resultados/gerenciadorDeResultados';
 
 class Mes {
   titulo: string;
@@ -40,7 +42,7 @@ export class AppComponent {
   datas = [];
   acoes = [];
   operacoes : Operacoes;
-  valorTotalVenda = 0;
+  resultado : Resultado;
   exibirOperacoes = false;
 
   listaDeOperacaoFiltrada = [];
@@ -57,21 +59,22 @@ export class AppComponent {
       
       
       // this.dataSelecionada = this.datas[this.datas.length - 1];
-      // this.acaoSelecionada = "Todas";
+      this.acaoSelecionada = "Todas";
          
       const operacoesFinalizadas = this.operacoes.obtenhaOperacoesFinalizadas();
       this.listaDeOperacaoFinalizadas = operacoesFinalizadas.lista;
-      this.valorTotalVenda = operacoesFinalizadas.valorDeVenda;
+      this.resultado = new GerenciadorDeResultados(operacoesFinalizadas.lista).obtenha();
     });
   }
   ExibirOperacoes(exibir){
     this.exibirOperacoes = exibir;
   }
   filtre() {
-    const resultado = this.operacoes.filtre(this.dataSelecionada, this.acaoSelecionada);
-    this.listaDeOperacaoFiltrada = resultado.lista;
-    this.valorTotalVenda = resultado.soma;
-    this.listaDeOperacaoFinalizadas = resultado.finalizadas;
+    const resultadoDoFiltro = this.operacoes.filtre(this.dataSelecionada, this.acaoSelecionada);
+    this.listaDeOperacaoFiltrada = resultadoDoFiltro.lista;
+    this.listaDeOperacaoFinalizadas = resultadoDoFiltro.finalizadas;
+
+    this.resultado = resultadoDoFiltro.resultado;
   }
 
   selecionaData(value) {

@@ -49,10 +49,27 @@ export class OperacoesFinalizadas{
 
     public filtre(data, empresa) {
         let lista = data === 'Todos' ? this.operacoesFinalizadas :
-        this.filtreinterno(x => x.operacaoDeSaida.MesAno(), data, this.operacoesFinalizadas);
-        lista = empresa === 'Todas' ? lista : this.filtreinterno(x => x.operacaoDeSaida.empresa, empresa, lista);
+        this.filtreinterno(x => 
+            x.operacaoDeSaida.MesAno(), data, this.operacoesFinalizadas);
+        lista = empresa === 'Todas' ? lista : 
+            this.filtreinterno(x => x.operacaoDeSaida.empresa, empresa, lista);
         return lista;
     }
+
+    private filtreinterno(atributoDaOperacao, valorDoFiltro, array: OperacaoFinalizada[]){
+        const listaDeValores:OperacaoFinalizada[] = [];
+
+        for (let index = 0; index < array.length; index++) {
+            const element = array[index];
+            const valor = atributoDaOperacao(element);
+            if (valor === valorDoFiltro) {
+                listaDeValores.push(element);
+            }
+        }
+
+        return listaDeValores;
+    }
+
 
     public obtenhaSoma(array: OperacaoFinalizada[]) {
         let soma = 0;
@@ -64,20 +81,7 @@ export class OperacoesFinalizadas{
         return soma;
     }
 
-    private filtreinterno(atributoDaOperacao, valorDoFiltro, array){
-        const listaDeValores = [];
-
-        for (let index = 0; index < array.length; index++) {
-            const element: Operacao = array[index];
-            const valor = atributoDaOperacao(element);
-            if (valor === valorDoFiltro) {
-                listaDeValores.push(element);
-            }
-        }
-
-        return listaDeValores;
-    }
-
+    
 
     retireElementoFinalizado(element: Operacao) {        
         const entradas = this.entradas.filter(x => x.empresa === element.empresa);
