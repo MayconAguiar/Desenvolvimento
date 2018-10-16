@@ -58,8 +58,7 @@ export class AppComponent {
       this.acoes = this.operacoes.obtenhaEmpresas();
 
       // this.dataSelecionada = this.datas[this.datas.length - 1];
-      this.acaoSelecionada = 'Todas';
-      debugger;
+      this.acaoSelecionada = 'Todas';      
       const operacoesFinalizadas = this.operacoes.obtenhaOperacoesFinalizadas();
       this.listaDeOperacaoFinalizadas = operacoesFinalizadas.lista;
       this.resultado = new GerenciadorDeResultados(operacoesFinalizadas.lista).obtenha();

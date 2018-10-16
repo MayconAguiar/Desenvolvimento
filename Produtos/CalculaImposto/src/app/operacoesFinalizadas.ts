@@ -1,5 +1,6 @@
 import { Operacao } from './operacao';
 import { OperacaoFinalizada } from './operacaoFinalizada';
+import { ContaCorrente } from './contacorrente/contaCorrente';
 
 export class OperacoesFinalizadas{
     private operacoes: Operacao[] = [];
@@ -42,7 +43,9 @@ export class OperacoesFinalizadas{
             // } else {
             //     this.entradas.push(element);
             // }
-        }
+        }        
+        const teste = new ContaCorrente(this.entradas, this.saidas).processe();
+        console.log(teste);
         this.retireElementoFinalizado();
         return this.operacoesFinalizadas;
     }

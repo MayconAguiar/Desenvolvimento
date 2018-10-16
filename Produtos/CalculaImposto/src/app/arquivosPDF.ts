@@ -121,7 +121,7 @@ export class ArquivosPDF {
                 // console.log(novalista);
                 // console.log();
                 const retorno = that.obtenhaListaFormatada(novalista);
-                console.log(retorno);
+                // console.log(retorno);
                 return retorno;
             });
         });
@@ -164,12 +164,12 @@ export class ArquivosPDF {
                 operacao.origem = arrayElement;
                 ////console.log(arrayElement.length);
                 
-                if (operacao.empresa == '01/00'){
-                    console.log(lista[indiceData -1]);
-                    console.log(element);
-                    //  console.log(operacao);
-                    //  console.log(arrayElement[9]);
-                }
+                // if (operacao.empresa == '01/00'){
+                //     console.log(lista[indiceData -1]);
+                //     console.log(element);
+                //     //  console.log(operacao);
+                //     //  console.log(arrayElement[9]);
+                // }
 
                 operacao.preco = parseFloat(arrayElement[4].replace(/,/g, '.'));
 
