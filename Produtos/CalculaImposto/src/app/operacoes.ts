@@ -46,11 +46,12 @@ export class Operacoes {
 
             arq.obtenhaLista(this.files)
             .subscribe(x => {
-                this.listaItensCsv = x;
+                this.operacoes = x;
             },
             err => { },
             () => {
-                this.processeInterno();
+                this.operacoes = this.operacoes.sort((a, b) => a.codigo < b.codigo ? -1 : 1);
+                // this.processeInterno();
                 observer.next(this.operacoes);
                 observer.complete();
             });

@@ -9,6 +9,7 @@ export class Operacao {
     preco: number;
     natureza: string;
     taxas: Taxas;
+    origem: string[];
     
 
     public Data() {

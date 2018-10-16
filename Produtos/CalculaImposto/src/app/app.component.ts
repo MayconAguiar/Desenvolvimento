@@ -59,7 +59,7 @@ export class AppComponent {
 
       // this.dataSelecionada = this.datas[this.datas.length - 1];
       this.acaoSelecionada = 'Todas';
-
+      debugger;
       const operacoesFinalizadas = this.operacoes.obtenhaOperacoesFinalizadas();
       this.listaDeOperacaoFinalizadas = operacoesFinalizadas.lista;
       this.resultado = new GerenciadorDeResultados(operacoesFinalizadas.lista).obtenha();

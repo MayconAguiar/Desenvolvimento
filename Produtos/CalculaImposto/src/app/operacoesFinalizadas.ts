@@ -17,14 +17,14 @@ export class OperacoesFinalizadas{
         
         for (let index = 0; index < this.operacoes.length; index++) {
             const element = this.operacoes[index];
-            const entrada = this.entradas.find(x => x.empresa === element.empresa);
+            // const entrada = this.entradas.find(x => x.empresa === element.empresa);
             // const saida = this.saidas.find(x => x.empresa == element.empresa);
 
-            if (element.natureza === 'Venda') {
+            if (element.natureza === 'V') {
                 this.saidas.push(element);
-                if (entrada) {
-                    this.retireElementoFinalizado(element);
-                }
+                // if (entrada) {
+                //     this.retireElementoFinalizado(element);
+                // }
             } else {
                 this.entradas.push(element);
             }
@@ -43,7 +43,7 @@ export class OperacoesFinalizadas{
             //     this.entradas.push(element);
             // }
         }
-
+        this.retireElementoFinalizado();
         return this.operacoesFinalizadas;
     }
 
@@ -83,33 +83,41 @@ export class OperacoesFinalizadas{
 
     
 
-    retireElementoFinalizado(element: Operacao) {        
-        const entradas = this.entradas.filter(x => x.empresa === element.empresa);
-        const saidas = this.saidas.filter(x => x.empresa === element.empresa);
+    retireElementoFinalizado() {        
+        //const entradas = this.entradas.filter(x => x.empresa === element.empresa);
+        //const saidas = this.saidas.filter(x => x.empresa === element.empresa);
         const saidasFinalizadas = [];
         const entradasFinalizadas = [];
+        
 
-        for (let i = 0; i < entradas.length; i++) {
-            const entrada = entradas[i];
+        for (let i = 0; i < this.entradas.length; i++) {
+            const entrada = this.entradas[i];
             let soma = entrada.quantidade;
+            
+            const saidas = this.saidas.filter(x => x.empresa === entrada.empresa);
 
             for (let j = 0; j < saidas.length; j++) {
-                const saida = saidas[j];
-                soma -= saida.quantidade;
-                // finalizou a entrada
-                if (soma === 0 )  {
-                    const operacaoFinalizada = new OperacaoFinalizada(entrada, saida);
-                    this.operacoesFinalizadas.push(operacaoFinalizada);
-                    entradasFinalizadas.push(entrada.codigo);
-                    saidasFinalizadas.push(saida.codigo);
-                    break;
+                const saida = this.saidas[j];
+
+                if ((soma - saida.quantidade) >= 0 ){
+                    soma -= saida.quantidade;
+                    // finalizou a entrada
+                    if (soma === 0 )  {
+                        const operacaoFinalizada = new OperacaoFinalizada(entrada, saida);
+                        this.operacoesFinalizadas.push(operacaoFinalizada);
+                        entradasFinalizadas.push(entrada.codigo);
+                        saidasFinalizadas.push(saida.codigo);
+                        break;
+                    }
                 }
+                
             }
 
+            
             this.remove(saidasFinalizadas, this.saidas);
         }
 
-        this.remove(entradasFinalizadas, this.entradas);
+        //this.remove(entradasFinalizadas, this.entradas);
     }
 
     remove(listaDeCodigos: any[], lista: Operacao[]) {
