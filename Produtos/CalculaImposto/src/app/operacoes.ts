@@ -76,6 +76,12 @@ export class Operacoes {
       return { lista: listafinalizada, valorDeVenda : this.operacoesFinalizadas.obtenhaSoma(listafinalizada) };
     }
 
+    public obtenhaOperacoesFinalizadas2(lista = this.operacoes) {
+        this.operacoesFinalizadas = new OperacoesFinalizadas(lista);
+        const listafinalizada = this.operacoesFinalizadas.processe2(this.operacoesFinalizadas.operacoes);
+        return listafinalizada;
+    }
+
     public filtre(data, empresa) {
         const finalizadas = this.operacoesFinalizadas.filtre(data, empresa);
         let lista = this.obtenhaOperacoesFiltradas(finalizadas);

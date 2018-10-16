@@ -1,9 +1,10 @@
 import { Operacao } from './operacao';
 import { OperacaoFinalizada } from './operacaoFinalizada';
 import { ContaCorrente } from './contacorrente/contaCorrente';
+import { Gerenciador } from './gerenciador/gerenciador';
 
 export class OperacoesFinalizadas{
-    private operacoes: Operacao[] = [];
+    public operacoes: Operacao[] = [];
     private entradas: Operacao[] = [];
     private saidas: Operacao[] = [];
     private operacoesFinalizadas: OperacaoFinalizada[] = [];
@@ -15,7 +16,7 @@ export class OperacoesFinalizadas{
     }
 
     processe()  {
-        
+
         for (let index = 0; index < this.operacoes.length; index++) {
             const element = this.operacoes[index];
             // const entrada = this.entradas.find(x => x.empresa === element.empresa);
@@ -43,11 +44,31 @@ export class OperacoesFinalizadas{
             // } else {
             //     this.entradas.push(element);
             // }
-        }        
-        const teste = new ContaCorrente(this.entradas, this.saidas).processe();
-        console.log(teste);
-        this.retireElementoFinalizado();
+        }
+        // const teste = new ContaCorrente(this.entradas, this.saidas).processe();
+        // console.log(teste);
+        // this.retireElementoFinalizado();
         return this.operacoesFinalizadas;
+    }
+
+    processe2(operacoes)  {
+
+        for (let index = 0; index < operacoes.length; index++) {
+            const element = operacoes[index];
+            // const entrada = this.entradas.find(x => x.empresa === element.empresa);
+            // const saida = this.saidas.find(x => x.empresa == element.empresa);
+
+            if (element.natureza === 'V') {
+                this.saidas.push(element);
+                // if (entrada) {
+                //     this.retireElementoFinalizado(element);
+                // }
+            } else {
+                this.entradas.push(element);
+            }
+        }
+
+        return new Gerenciador(this.entradas, this.saidas).obtenha();
     }
 
     public filtre(data, empresa) {
