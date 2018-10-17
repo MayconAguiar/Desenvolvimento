@@ -1,62 +1,67 @@
 
-import { OperacaoCompleta } from '../negocio/OperacaoCompleta';
-import * as moment from 'moment';
+import { ItemDashboard } from '../negocio/ItemDashboard';
 import { ItemArquivo } from '../arquivos/itemArquivo';
 
 export class Gerenciador {
-    private compra: ItemArquivo[];
-    private venda: ItemArquivo[];
-    private resultado: OperacaoCompleta[] = [];
+    private compra: ItemArquivo[] = [];
+    private venda: ItemArquivo[] = [];
+    private resultado: ItemDashboard[] = [];
     private idsAtivos = [];
     private datasPorAtivo = [];
     private formatoData = 'YYYYMMDD';
 
-    constructor(compra: ItemArquivo[], venda: ItemArquivo[]) {
-        this.compra = compra;
-        this.venda = venda;
-        // console.log('compra');
-        // console.log(this.compra);
-        // console.log('venda');
-        // console.log(this.venda);
-
-        this.ordene();
+    constructor(itens: ItemArquivo[] ) {
+        this.separeCompraDaVenda(itens);
         this.inicieDados();
     }
 
     obtenha() {
 
-        const chaves = Object.keys(this.datasPorAtivo).sort((a, b) => a < b? -1 : 1);
+        const chaves = Object.keys(this.datasPorAtivo).sort((a, b) => a < b ? -1 : 1);
 
         const that = this;
         chaves.forEach(chave => {
 
             const empresa = chave;
-            let operacaoAnterior = new OperacaoCompleta();
-            const datas = that.datasPorAtivo[chave].sort((a, b) => a < b? -1 : 1);
-            
+            let itemdashboard = new ItemDashboard();
+            const datas = that.datasPorAtivo[chave].sort((a, b) => a < b ? -1 : 1);
+
             datas.forEach(data => {
                 // debugger;
-                const naoExisteSaidaDaAnterior = operacaoAnterior.entrada !==undefined 
-                && operacaoAnterior.entrada.existeValor() 
-                && !operacaoAnterior.saida.existeValor();
+                const naoExisteSaidaDaAnterior = itemdashboard.entrada !== undefined
+                && itemdashboard.entrada.existeValor()
+                && !itemdashboard.saida.existeValor();
 
                 if (naoExisteSaidaDaAnterior) {
                     const saidasDoDia = this.venda.filter(x => data === x.Data(this.formatoData) && x.empresa === empresa);
-                    operacaoAnterior.processeSaida(saidasDoDia);
+                    itemdashboard.processeSaida(saidasDoDia);
                 } else {
-                    const operacao = new OperacaoCompleta();
+                    const itemDashBoard = new ItemDashboard();
+
                     const entradasDoDia = this.compra.filter(x => data === x.Data(this.formatoData) && x.empresa === empresa);
                     const saidasDoDia = this.venda.filter(x => data === x.Data(this.formatoData) && x.empresa === empresa);
-    
-                    operacao.processe(entradasDoDia, saidasDoDia, operacaoAnterior);
-                    operacaoAnterior = operacao;
-                    this.resultado.push(operacao);
+
+                    itemDashBoard.processe(entradasDoDia, saidasDoDia, itemdashboard);
+                    itemdashboard = itemDashBoard;
+                    this.resultado.push(itemDashBoard);
                 }
             });
 
         });
+
         console.log(this.resultado);
         return this.resultado;
+    }
+
+    private separeCompraDaVenda(itens: ItemArquivo[]) {
+        for (let index = 0; index < itens.length; index++) {
+            const element = itens[index];
+            if (element.natureza === 'V') {
+                this.venda.push(element);
+            } else {
+                this.compra.push(element);
+            }
+        }
     }
 
     private inicieDados() {
@@ -73,17 +78,4 @@ export class Gerenciador {
             }
         });
     }
-
-    private ordene() {
-        this.compra = this.compra.sort((a, b) =>
-        a.empresa < b.empresa && a.codigo < b.codigo ? -1 : 1);
-
-        this.venda = this.venda.sort((a, b) =>
-        a.empresa < b.empresa && a.codigo < b.codigo ? -1 : 1);
-    }
-
-    private obtenhaDataFormatada(value) {
-        moment.locale('pt-br');
-        return moment(value.substr(0, 10) , 'DD/MM/YYYY');
-      }
 }

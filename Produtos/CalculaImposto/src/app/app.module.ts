@@ -6,13 +6,15 @@ import {MomentModule} from 'angular2-moment/moment.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemDashboardComponent } from './item-dashboard/item-dashboard.component';
+import { DatasComponent } from './filtros/datas/datas.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    ItemDashboardComponent
+    ItemDashboardComponent,
+    DatasComponent
   ],
   imports: [
     BrowserModule, MomentModule

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OperacaoCompleta } from '../negocio/OperacaoCompleta';
+import { ItemDashboard } from '../negocio/ItemDashboard';
+import { Tipos } from '../tipos.enum';
 
 @Component({
   selector: 'app-item-dashboard',
@@ -8,9 +9,14 @@ import { OperacaoCompleta } from '../negocio/OperacaoCompleta';
 })
 export class ItemDashboardComponent implements OnInit {
 
-  @Input() item: OperacaoCompleta;
+  @Input() item: ItemDashboard;
+  dicionarioTipos = [];
 
-  constructor() { }
+  constructor() {
+    this.dicionarioTipos[Tipos.OPCOES] = 'Opções';
+    this.dicionarioTipos[Tipos.SWING_TRADE] = 'Swing Trade';
+    this.dicionarioTipos[Tipos.NAO_ATENDIDO] = 'Não Atendido';
+  }
 
   ngOnInit() {
   }

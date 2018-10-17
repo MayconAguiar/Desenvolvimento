@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { OperacaoCompleta } from '../negocio/OperacaoCompleta';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { ItemDashboard } from '../negocio/ItemDashboard';
 import { GerenciadorDeArquivos } from '../gerenciadores/gerenciadorDeArquivos';
+import { Gerenciador } from '../gerenciadores/gerenciador';
+import moment = require('moment');
 
 @Component({
   selector: 'app-dashboard',
@@ -11,18 +13,26 @@ export class DashboardComponent implements OnInit {
 
   constructor() { }
 
-  @Input() items: OperacaoCompleta[] = [];
+  items: ItemDashboard[] = [];
+  original: ItemDashboard[] = [];
 
   ngOnInit() {
+  }
+
+  public mudouFiltro(mes) {
+    // console.log('Mês selecionado');
+    // console.log(mes);
+    this.items = this.original.filter(x => x.saida.data !== undefined && x.saida.data.month() === Number(mes));
+
+    // console.log(teste);
   }
 
   public changeListener(files: FileList) {
 
     const operacoes = new GerenciadorDeArquivos(files);
     operacoes.processe().subscribe(x => {
-
-      this.items = operacoes.obtenhaOperacoesFinalizadas2(x);
-      console.log(this.items);
+      this.items = new Gerenciador(x).obtenha();
+      this.original = this.items;
     });
   }
 

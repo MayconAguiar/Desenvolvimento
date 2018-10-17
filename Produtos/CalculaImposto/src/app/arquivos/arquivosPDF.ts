@@ -8,16 +8,16 @@ import { ItemArquivo } from './itemArquivo';
 declare var require: any;
 
 export class ArquivosPDF {
-    private lista = [];
+    private lista: ItemArquivo[] = [];
 
     constructor() {
     }
 
     obtenhaLista(files: FileList) {
-        return new Observable<any>(observer => this.leiaArquivo(files, 0, observer));
+        return new Observable<ItemArquivo[]>(observer => this.leiaArquivo(files, 0, observer));
     }
 
-    private leiaArquivo(files, index, observer: Subscriber<any>) {
+    private leiaArquivo(files, index, observer: Subscriber<ItemArquivo[]>) {
         const PDFJS: PDFJSStatic = require('pdfjs-dist');
 
         PDFJS.GlobalWorkerOptions.workerSrc = '../assets/pdf.worker.min.js';
@@ -28,8 +28,7 @@ export class ArquivosPDF {
 
              const file: File = files.item(index);
              const reader: FileReader = new FileReader();
-             // reader.readAsArrayBuffer(file);
-             
+
 
              reader.onload = (event: any) => {
                  const typedarray = event.target.result;
@@ -40,22 +39,23 @@ export class ArquivosPDF {
                         that.lista.push(element);
                     }
                     index += 1;
-                    //debugger;
+                    // debugger;
                     this.leiaArquivo(files, index, observer);
                 });
              };
 
             reader.readAsArrayBuffer(file);
         } else {
-             observer.next(this.lista);
-             console.log('lista com todos');
-             console.log(this.lista);
+            observer.next(this.lista);
+            console.log('lista com todos');
+            console.log(this.lista);
              observer.complete();
         }
     }
 
     private ObtenhaDocumento(PDFJS, typedarray) {
         const that = this;
+
         return PDFJS.getDocument(typedarray, new Uint8Array(typedarray)).then( pdf => {
 
 
@@ -112,11 +112,11 @@ export class ArquivosPDF {
             }
             // Wait for all pages and join text
             return Promise.all(countPromises).then(function (listas) {
-                let novalista = [];
+                const novalista: ItemArquivo[] = [];
 
                 for (let i = 0; i < listas.length; i++) {
                     const pagina = listas[i];
-                    
+
                     // console.log('pagina de dados');
                     // console.log(pagina);
                     const listaDeAcoes = that.obtenhaListaFormatada(pagina);
@@ -124,7 +124,7 @@ export class ArquivosPDF {
                     // console.log(listaDeAcoes);
                     listaDeAcoes.forEach(x => novalista.push(x));
                 }
-                
+
                 return novalista;
             });
         });
@@ -156,41 +156,39 @@ export class ArquivosPDF {
                 continue;
             }
 
-            const operacao = new ItemArquivo();
+            const itemarquivo = new ItemArquivo();
 
             codigo += 1;
-            operacao.natureza = arrayElement[1];
-            operacao.codigo = codigo;
-            operacao.data = this.obtenhaDataFormatada(data);
-            operacao.origem = arrayElement;
+            itemarquivo.natureza = arrayElement[1];
+            itemarquivo.codigo = codigo;
+            itemarquivo.data = this.obtenhaDataFormatada(data);
+            itemarquivo.origem = arrayElement;
+            itemarquivo.tipo = tipo;
+
             const ultimoElemento = arrayElement.length - 1;
+
             switch (tipo) {
                 case Tipos.SWING_TRADE:
-                    operacao.empresa = arrayElement[4].split(" ")[0];
-                    operacao.quantidade = Number(arrayElement[ultimoElemento -3].replace(/\D/g, ''));
-                    operacao.preco = parseFloat(arrayElement[ultimoElemento -2].replace(/,/g, '.'));
+                    itemarquivo.empresa = arrayElement[4].split(' ')[0];
+                    itemarquivo.quantidade = Number(arrayElement[ultimoElemento - 3].replace(/\D/g, ''));
+                    itemarquivo.preco = parseFloat(arrayElement[ultimoElemento - 2].replace(/,/g, '.'));
+
                     break;
                 case Tipos.OPCOES:
-                    operacao.empresa = arrayElement[4].split(" ")[0];
-                    operacao.quantidade = Number(arrayElement[ultimoElemento -3].replace(/\D/g, ''));
-                    operacao.preco = parseFloat(arrayElement[ultimoElemento -2].replace(/,/g, '.'));
+                    itemarquivo.empresa = arrayElement[4].split(' ')[0];
+                    itemarquivo.quantidade = Number(arrayElement[ultimoElemento - 3].replace(/\D/g, ''));
+                    itemarquivo.preco = parseFloat(arrayElement[ultimoElemento - 2].replace(/,/g, '.'));
                     break;
                 default:
                     break;
             }
 
-            operacao.taxas = new Taxas(operacao);
-             //if(operacao.empresa =='BRASIL') {                
-                 novaLista.push(operacao);
-             //} 
-            //  else {
-            //      console.log('empresa diferente:');
-            //      console.log(operacao);
-            //  }
-            // novaLista.push(operacao);
+            itemarquivo.taxas = new Taxas(itemarquivo);
+             // if(operacao.empresa =='BRASIL') {
+                 novaLista.push(itemarquivo);
+             // }
+
         }
-        // console.log('lista onde deve ter todos:');
-        // console.log(novaLista);
         return novaLista;
     }
 
@@ -209,7 +207,7 @@ export class ArquivosPDF {
         let tipo = Tipos.NAO_ATENDIDO;
 
         if (linha.indexOf('1-BOVESPA') > -1) {
-            tipo =  linha.indexOf('OPCAO DE COMPRA') > -1 || 
+            tipo =  linha.indexOf('OPCAO DE COMPRA') > -1 ||
             linha.indexOf('OPCAO DE VENDA') > -1 ? Tipos.OPCOES : Tipos.SWING_TRADE;
         }
 

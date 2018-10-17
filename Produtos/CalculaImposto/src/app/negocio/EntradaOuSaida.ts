@@ -1,12 +1,15 @@
 import { Papel } from './Papel';
 import { ItemArquivo } from '../arquivos/itemArquivo';
+import { Tipos } from '../tipos.enum';
+import moment = require('moment');
 
 export class EntradaOuSaida {
 
     public papeis: Papel[] = [];
     public operacao: ItemArquivo[];
-    public data: string;
-    private count = 0;
+    public data: moment.Moment;
+    public tipo: Tipos;
+    public count = 0;
     private valor = 0;
 
     quantidade = 0;
@@ -17,11 +20,12 @@ export class EntradaOuSaida {
             const papel = new Papel();
             papel.natureza = x.natureza;
             papel.empresa = x.empresa;
-            this.data = x.Data();
+            this.data = x.data;
             this.papeis.push(papel);
             this.quantidade += x.quantidade;
             this.count ++;
             this.valor += x.preco;
+            this.tipo = x.tipo;
         });
     }
 
@@ -31,5 +35,9 @@ export class EntradaOuSaida {
 
     public ValorMedio() {
         return this.valor ===  0 ? 0 : this.valor / this.count;
+    }
+
+    public Data() {
+        return this.data == null ? '' : this.data.format('DD/MM/YYYY');
     }
 }

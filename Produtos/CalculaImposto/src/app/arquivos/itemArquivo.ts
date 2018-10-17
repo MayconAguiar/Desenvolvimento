@@ -1,5 +1,6 @@
 import * as moment from 'moment';
 import { Taxas } from '../negocio/taxas';
+import { Tipos } from '../tipos.enum';
 
 export class ItemArquivo {
     codigo: number;
@@ -10,9 +11,10 @@ export class ItemArquivo {
     natureza: string;
     taxas: Taxas;
     origem: string[];
-    
+    tipo: Tipos;
 
-    public Data(formato: string ='DD/MM/YYYY') {
+
+    public Data(formato: string = 'DD/MM/YYYY') {
         return this.data.format(formato);
     }
     public MesAno() {

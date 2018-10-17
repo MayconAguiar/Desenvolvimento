@@ -1,13 +1,18 @@
 
-<div class="controles mw-100 float-sm-left">
-  <div class="float-sm-left mw-25 h-100 px-2">
+<div class="controles mw-100 float-sm-left ml-1">
+  <div class="float-sm-left mw-25 h-100 ">
       <span class="btn btn-primary btn-file h-100">
           Arquivos ... <input type="file" 
           (change)="changeListener($event.target.files)" multiple accept=".pdf">
         </span>
 </div>
+<div *ngIf="original.length > 0" class="itens ml-1">
+  <div class="item">
+    <app-datas (mudoumes)="mudouFiltro($event) "></app-datas>
+  </div>
 
-<div class="item" *ngIf="items.length > 0"><h5>Operações Finalizadas </h5></div>
-<div *ngFor="let item of items; let i = index" class="card" style="width: 18rem;">
-  <app-item-dashboard [item]="item" ></app-item-dashboard>
+  <div class="item"><h5>Operações Finalizadas </h5></div>
+  <div *ngFor="let item of items; let i = index" class="card" style="width: 18rem;">
+    <app-item-dashboard [item]="item" ></app-item-dashboard>
+  </div>
 </div>
