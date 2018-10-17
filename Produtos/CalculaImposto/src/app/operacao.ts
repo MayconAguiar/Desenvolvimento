@@ -12,8 +12,8 @@ export class Operacao {
     origem: string[];
     
 
-    public Data() {
-        return this.data.format('DD/MM/YYYY');
+    public Data(formato: string ='DD/MM/YYYY') {
+        return this.data.format(formato);
     }
     public MesAno() {
         return this.data.format('MMMM/YYYY');

@@ -8,6 +8,7 @@ export class Gerenciador {
     private resultado: OperacaoCompleta[] = [];
     private idsAtivos = [];
     private datasPorAtivo = [];
+    private formatoData = 'YYYYMMDD';
 
     constructor(compra: Operacao[], venda: Operacao[]) {
         this.compra = compra;
@@ -30,20 +31,21 @@ export class Gerenciador {
 
             const empresa = chave;
             let operacaoAnterior = new OperacaoCompleta();
-
-            that.datasPorAtivo[chave].forEach(data => {
+            const datas = that.datasPorAtivo[chave].sort((a, b) => a < b? -1 : 1);
+            
+            datas.forEach(data => {
                 // debugger;
                 const naoExisteSaidaDaAnterior = operacaoAnterior.entrada !==undefined 
                 && operacaoAnterior.entrada.existeValor() 
                 && !operacaoAnterior.saida.existeValor();
 
                 if (naoExisteSaidaDaAnterior) {
-                    const saidasDoDia = this.venda.filter(x => data === x.Data() && x.empresa === empresa);
+                    const saidasDoDia = this.venda.filter(x => data === x.Data(this.formatoData) && x.empresa === empresa);
                     operacaoAnterior.processeSaida(saidasDoDia);
                 } else {
                     const operacao = new OperacaoCompleta();
-                    const entradasDoDia = this.compra.filter(x => data === x.Data() && x.empresa === empresa);
-                    const saidasDoDia = this.venda.filter(x => data === x.Data() && x.empresa === empresa);
+                    const entradasDoDia = this.compra.filter(x => data === x.Data(this.formatoData) && x.empresa === empresa);
+                    const saidasDoDia = this.venda.filter(x => data === x.Data(this.formatoData) && x.empresa === empresa);
     
                     operacao.processe(entradasDoDia, saidasDoDia, operacaoAnterior);
                     operacaoAnterior = operacao;
@@ -60,7 +62,7 @@ export class Gerenciador {
         const operacoes = this.compra.concat(this.venda);
 
         operacoes.forEach(element => {
-            const data = element.data.format('DD/MM/YYYY');
+            const data = element.data.format(this.formatoData);
             if (this.idsAtivos.indexOf(element.empresa) === -1) {
                 this.idsAtivos.push(element.empresa);
                 this.datasPorAtivo[element.empresa] = [];
