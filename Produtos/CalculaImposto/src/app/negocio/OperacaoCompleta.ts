@@ -1,6 +1,7 @@
-import { Operacao } from '../operacao';
+
 import { Saldo } from './Saldo';
 import { EntradaOuSaida } from './EntradaOuSaida';
+import { ItemArquivo } from '../arquivos/itemArquivo';
 
 
 export class OperacaoCompleta {
@@ -13,7 +14,7 @@ export class OperacaoCompleta {
         this.saldo = new Saldo();
     }
 
-    processe(operacao1: Operacao[], operacao2: Operacao[], operacaoAnterior: OperacaoCompleta) {
+    processe(operacao1: ItemArquivo[], operacao2: ItemArquivo[], operacaoAnterior: OperacaoCompleta) {
         this.operacaoAnterior = operacaoAnterior;
         this.entrada = new EntradaOuSaida(operacao1);
         this.saida = new EntradaOuSaida(operacao2);
@@ -21,7 +22,7 @@ export class OperacaoCompleta {
         this.atualizeValores();
     }
     
-    processeSaida(operacao1: Operacao[]) {        
+    processeSaida(operacao1: ItemArquivo[]) {        
         this.saida = new EntradaOuSaida(operacao1);
         this.atualizeValores();
     }

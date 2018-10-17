@@ -1,16 +1,17 @@
-import { Operacao } from '../operacao';
+
 import { OperacaoCompleta } from '../negocio/OperacaoCompleta';
 import * as moment from 'moment';
+import { ItemArquivo } from '../arquivos/itemArquivo';
 
 export class Gerenciador {
-    private compra: Operacao[];
-    private venda: Operacao[];
+    private compra: ItemArquivo[];
+    private venda: ItemArquivo[];
     private resultado: OperacaoCompleta[] = [];
     private idsAtivos = [];
     private datasPorAtivo = [];
     private formatoData = 'YYYYMMDD';
 
-    constructor(compra: Operacao[], venda: Operacao[]) {
+    constructor(compra: ItemArquivo[], venda: ItemArquivo[]) {
         this.compra = compra;
         this.venda = venda;
         // console.log('compra');
@@ -19,7 +20,7 @@ export class Gerenciador {
         // console.log(this.venda);
 
         this.ordene();
-        this.inicieContaCorrente();
+        this.inicieDados();
     }
 
     obtenha() {
@@ -58,7 +59,7 @@ export class Gerenciador {
         return this.resultado;
     }
 
-    private inicieContaCorrente() {
+    private inicieDados() {
         const operacoes = this.compra.concat(this.venda);
 
         operacoes.forEach(element => {

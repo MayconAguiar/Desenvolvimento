@@ -1,17 +1,17 @@
 import { Papel } from './Papel';
-import { Operacao } from '../operacao';
+import { ItemArquivo } from '../arquivos/itemArquivo';
 
 export class EntradaOuSaida {
 
     public papeis: Papel[] = [];
-    public operacao: Operacao[];
+    public operacao: ItemArquivo[];
     public data: string;
     private count = 0;
     private valor = 0;
 
     quantidade = 0;
 
-    constructor(operacao: Operacao[]) {
+    constructor(operacao: ItemArquivo[]) {
         this.operacao = operacao;
         operacao.forEach(x => {
             const papel = new Papel();

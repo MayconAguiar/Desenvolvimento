@@ -1,55 +1,36 @@
-import { Operacao } from './operacao';
 import { OperacaoFinalizada } from './operacaoFinalizada';
-import { ContaCorrente } from './contacorrente/contaCorrente';
-import { Gerenciador } from './gerenciador/gerenciador';
+import { Gerenciador } from './gerenciadores/gerenciador';
+import { ItemArquivo } from './arquivos/itemArquivo';
 
 export class OperacoesFinalizadas{
-    public operacoes: Operacao[] = [];
-    private entradas: Operacao[] = [];
-    private saidas: Operacao[] = [];
+    public operacoes: ItemArquivo[] = [];
+    private entradas: ItemArquivo[] = [];
+    private saidas: ItemArquivo[] = [];
     private operacoesFinalizadas: OperacaoFinalizada[] = [];
 
-    constructor(operacoes: Operacao[]){
+    constructor(operacoes: ItemArquivo[]){
         this.operacoes = operacoes;
         this.entradas = [];
         this.saidas = [];
     }
 
-    processe()  {
+    // processe()  {
 
-        for (let index = 0; index < this.operacoes.length; index++) {
-            const element = this.operacoes[index];
-            // const entrada = this.entradas.find(x => x.empresa === element.empresa);
-            // const saida = this.saidas.find(x => x.empresa == element.empresa);
+    //     for (let index = 0; index < this.operacoes.length; index++) {
+    //         const element = this.operacoes[index];
+            
+    //         if (element.natureza === 'V') {
+    //             this.saidas.push(element);
+            
+    //         } else {
+    //             this.entradas.push(element);
+    //         }
 
-            if (element.natureza === 'V') {
-                this.saidas.push(element);
-                // if (entrada) {
-                //     this.retireElementoFinalizado(element);
-                // }
-            } else {
-                this.entradas.push(element);
-            }
-
-            // verificar e corrigir o algoritmo para quando não tem compra
-
-            // if (entrada) {
-            //     // segunda compra por exemplo
-            //     if (entrada.natureza === element.natureza) {
-            //         this.entradas.push(element);
-            //     } else {
-            //         this.saidas.push(element);
-            //         this.retireElementoFinalizado(element);
-            //     }
-            // } else {
-            //     this.entradas.push(element);
-            // }
-        }
-        // const teste = new ContaCorrente(this.entradas, this.saidas).processe();
-        // console.log(teste);
-        // this.retireElementoFinalizado();
-        return this.operacoesFinalizadas;
-    }
+            
+    //     }
+        
+    //     return this.operacoesFinalizadas;
+    // }
 
     processe2(operacoes)  {
 
@@ -144,7 +125,7 @@ export class OperacoesFinalizadas{
         //this.remove(entradasFinalizadas, this.entradas);
     }
 
-    remove(listaDeCodigos: any[], lista: Operacao[]) {
+    remove(listaDeCodigos: any[], lista: ItemArquivo[]) {
         for (let index = 0; index < listaDeCodigos.length; index++) {
             const index = lista.findIndex(x => x.codigo == listaDeCodigos[index])            
             lista = lista.splice(index, 1);

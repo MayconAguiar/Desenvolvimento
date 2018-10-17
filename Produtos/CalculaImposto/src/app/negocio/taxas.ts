@@ -1,16 +1,16 @@
 import { OperacaoFinalizada } from "../operacaoFinalizada";
-import { Operacao } from "../operacao";
+import { ItemArquivo } from "../arquivos/itemArquivo";
 
 export class Taxas {
     
-    private operacao: Operacao;
+    private operacao: ItemArquivo;
     taxaDeLiquidacao = 0;
     emolumentos = 0;
     corretagem = 0.80;
     iss = 0;
     total = 0;
 
-    constructor(operacaoFinalizada: Operacao) {
+    constructor(operacaoFinalizada: ItemArquivo) {
         this.operacao = operacaoFinalizada;
         this.construa();
     }

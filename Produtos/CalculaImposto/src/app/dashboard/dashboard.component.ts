@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OperacaoCompleta } from '../negocio/OperacaoCompleta';
-import { Operacoes } from '../operacoes';
+import { GerenciadorDeArquivos } from '../gerenciadores/gerenciadorDeArquivos';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   public changeListener(files: FileList) {
 
-    const operacoes = new Operacoes(files);
+    const operacoes = new GerenciadorDeArquivos(files);
     operacoes.processe().subscribe(x => {
 
       this.items = operacoes.obtenhaOperacoesFinalizadas2(x);

@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { PDFJSStatic } from 'pdfjs-dist';
-import { Operacao } from './operacao';
 import * as moment from 'moment';
-import { Taxas } from './resultados/taxas';
-import { Tipos } from './tipos.enum';
+import { Tipos } from '../tipos.enum';
+import { Taxas } from '../negocio/taxas';
+import { ItemArquivo } from './itemArquivo';
 declare var require: any;
 
 export class ArquivosPDF {
@@ -156,7 +156,7 @@ export class ArquivosPDF {
                 continue;
             }
 
-            const operacao = new Operacao();
+            const operacao = new ItemArquivo();
 
             codigo += 1;
             operacao.natureza = arrayElement[1];

@@ -1,7 +1,7 @@
 import * as moment from 'moment';
-import { Taxas } from './resultados/taxas';
+import { Taxas } from '../negocio/taxas';
 
-export class Operacao {
+export class ItemArquivo {
     codigo: number;
     empresa: string;
     data: moment.Moment;

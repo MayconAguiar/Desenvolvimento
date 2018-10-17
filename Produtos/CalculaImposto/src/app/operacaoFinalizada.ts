@@ -1,11 +1,13 @@
-import { Operacao } from "./operacao";
+import { ItemArquivo } from "./arquivos/itemArquivo";
+
+
 
 export class OperacaoFinalizada {
-    public operacaoDeEntrada: Operacao;
-    public operacaoDeSaida: Operacao;
+    public operacaoDeEntrada: ItemArquivo;
+    public operacaoDeSaida: ItemArquivo;
     
 
-    constructor(operacaoDeEntrada: Operacao, operacaoDeSaida: Operacao) {
+    constructor(operacaoDeEntrada: ItemArquivo, operacaoDeSaida: ItemArquivo) {
         this.operacaoDeSaida = operacaoDeSaida;
         this.operacaoDeEntrada = operacaoDeEntrada;
     }
