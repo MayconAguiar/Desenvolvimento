@@ -12,10 +12,10 @@ export class Gerenciador {
     constructor(compra: Operacao[], venda: Operacao[]) {
         this.compra = compra;
         this.venda = venda;
-        console.log('compra');
-        console.log(this.compra);
-        console.log('venda');
-        console.log(this.venda);
+        // console.log('compra');
+        // console.log(this.compra);
+        // console.log('venda');
+        // console.log(this.venda);
 
         this.ordene();
         this.inicieContaCorrente();
@@ -23,28 +23,36 @@ export class Gerenciador {
 
     obtenha() {
 
-        const chaves = Object.keys(this.datasPorAtivo);
+        const chaves = Object.keys(this.datasPorAtivo).sort((a, b) => a < b? -1 : 1);
 
         const that = this;
         chaves.forEach(chave => {
 
             const empresa = chave;
-            const operacaoAnterior = new OperacaoCompleta();
+            let operacaoAnterior = new OperacaoCompleta();
 
             that.datasPorAtivo[chave].forEach(data => {
+                // debugger;
+                const naoExisteSaidaDaAnterior = operacaoAnterior.entrada !==undefined 
+                && operacaoAnterior.entrada.existeValor() 
+                && !operacaoAnterior.saida.existeValor();
 
-                const operacao = new OperacaoCompleta();
-                const entradasDoDia = this.compra.filter(x => data === x.Data() && x.empresa === empresa);
-                const saidasDoDia = this.venda.filter(x => data === x.Data() && x.empresa === empresa);
-
-                operacao.processe(entradasDoDia, saidasDoDia, operacaoAnterior);
-                this.resultado.push(operacao);
-
-
+                if (naoExisteSaidaDaAnterior) {
+                    const saidasDoDia = this.venda.filter(x => data === x.Data() && x.empresa === empresa);
+                    operacaoAnterior.processeSaida(saidasDoDia);
+                } else {
+                    const operacao = new OperacaoCompleta();
+                    const entradasDoDia = this.compra.filter(x => data === x.Data() && x.empresa === empresa);
+                    const saidasDoDia = this.venda.filter(x => data === x.Data() && x.empresa === empresa);
+    
+                    operacao.processe(entradasDoDia, saidasDoDia, operacaoAnterior);
+                    operacaoAnterior = operacao;
+                    this.resultado.push(operacao);
+                }
             });
 
         });
-
+        console.log(this.resultado);
         return this.resultado;
     }
 

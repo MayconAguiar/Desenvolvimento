@@ -22,12 +22,14 @@ export class ArquivosPDF {
 
         PDFJS.GlobalWorkerOptions.workerSrc = '../assets/pdf.worker.min.js';
 
+        const that = this;
+
         if (index < files.length) {
 
              const file: File = files.item(index);
              const reader: FileReader = new FileReader();
              // reader.readAsArrayBuffer(file);
-             const that = this;
+             
 
              reader.onload = (event: any) => {
                  const typedarray = event.target.result;
@@ -35,9 +37,10 @@ export class ArquivosPDF {
                 this.ObtenhaDocumento(PDFJS, typedarray).then(texts => {
                     for (let y = 0; y < texts.length; y++) {
                         const element = texts[y];
-                        this.lista.push(element);
+                        that.lista.push(element);
                     }
                     index += 1;
+                    //debugger;
                     this.leiaArquivo(files, index, observer);
                 });
              };
@@ -45,6 +48,8 @@ export class ArquivosPDF {
             reader.readAsArrayBuffer(file);
         } else {
              observer.next(this.lista);
+             console.log('lista com todos');
+             console.log(this.lista);
              observer.complete();
         }
     }
@@ -107,37 +112,27 @@ export class ArquivosPDF {
             }
             // Wait for all pages and join text
             return Promise.all(countPromises).then(function (listas) {
-                const novalista = [];
+                let novalista = [];
 
                 for (let i = 0; i < listas.length; i++) {
-                    const lista = listas[i];
-                    for (let j = 0; j < lista.length; j++) {
-                        const element = lista[j];
-                        novalista.push(element);
-
-                    }
+                    const pagina = listas[i];
+                    
+                    // console.log('pagina de dados');
+                    // console.log(pagina);
+                    const listaDeAcoes = that.obtenhaListaFormatada(pagina);
+                    // console.log('lista de acoes');
+                    // console.log(listaDeAcoes);
+                    listaDeAcoes.forEach(x => novalista.push(x));
                 }
-                // console.log(novalista);
-                // console.log();
-                const retorno = that.obtenhaListaFormatada(novalista);
-                // console.log(retorno);
-                return retorno;
+                
+                return novalista;
             });
         });
 
     }
 
     ehElementoValido(item: string) {
-        return item.trim() !== ''
-        && !item.startsWith('PN')
-        && !item.startsWith('01/00')
-        && !item.startsWith('VISTA')
-        && !item.startsWith('VISTA')
-        && !item.startsWith('EJ')
-        && !item.startsWith('N2')
-        && !item.startsWith('ON')
-        && !item.startsWith('NM')
-        && item !== 'D';
+        return item.trim() !== '';
     }
 
     obtenhaListaFormatada(lista: string[]) {
@@ -156,6 +151,8 @@ export class ArquivosPDF {
 
 
             if (tipo === Tipos.NAO_ATENDIDO) {
+                // console.log('tipo não atendido:');
+                // console.log(element);
                 continue;
             }
 
@@ -166,77 +163,56 @@ export class ArquivosPDF {
             operacao.codigo = codigo;
             operacao.data = this.obtenhaDataFormatada(data);
             operacao.origem = arrayElement;
-
+            const ultimoElemento = arrayElement.length - 1;
             switch (tipo) {
                 case Tipos.SWING_TRADE:
-                    operacao.empresa = arrayElement[2];
-                    operacao.quantidade = Number(arrayElement[3].replace(/\D/g, ''));
-                    operacao.preco = parseFloat(arrayElement[4].replace(/,/g, '.'));
+                    operacao.empresa = arrayElement[4].split(" ")[0];
+                    operacao.quantidade = Number(arrayElement[ultimoElemento -3].replace(/\D/g, ''));
+                    operacao.preco = parseFloat(arrayElement[ultimoElemento -2].replace(/,/g, '.'));
                     break;
                 case Tipos.OPCOES:
-                    operacao.empresa = arrayElement[4];
-                    operacao.quantidade = Number(arrayElement[6].replace(/\D/g, ''));
-                    operacao.preco = parseFloat(arrayElement[7].replace(/,/g, '.'));
+                    operacao.empresa = arrayElement[4].split(" ")[0];
+                    operacao.quantidade = Number(arrayElement[ultimoElemento -3].replace(/\D/g, ''));
+                    operacao.preco = parseFloat(arrayElement[ultimoElemento -2].replace(/,/g, '.'));
                     break;
                 default:
                     break;
             }
 
             operacao.taxas = new Taxas(operacao);
-            novaLista.push(operacao);
+             //if(operacao.empresa =='BRASIL') {                
+                 novaLista.push(operacao);
+             //} 
+            //  else {
+            //      console.log('empresa diferente:');
+            //      console.log(operacao);
+            //  }
+            // novaLista.push(operacao);
         }
-
+        // console.log('lista onde deve ter todos:');
+        // console.log(novaLista);
         return novaLista;
     }
 
     private obtenhaDataFormatada(value) {
         moment.locale('pt-br');
         return moment(value.substr(0, 10) , 'DD/MM/YYYY');
-        // if (value == null || value === ''){
-        //     debugger;
-        //     console.log('teste');
-        // } else {
-        // }
-      }
+    }
 
     private adicioneLinha(listaItens: any[], listaDeLinhas: any[]) {
         const linha = listaItens.join(';');
-        // if (this.ehLinhaSwingTrade(linha)){
-        //     listaDeLinhas.push(linha);
-        // } else {
-        //     console.log(linha);
-        // }
-
         listaDeLinhas.push(linha);
 
     }
 
     private ObtenhaTipo(linha: string) {
+        let tipo = Tipos.NAO_ATENDIDO;
+
         if (linha.indexOf('1-BOVESPA') > -1) {
-            return linha.indexOf('OPCAO DE COMPRA') === -1 ? Tipos.SWING_TRADE : Tipos.OPCOES;
+            tipo =  linha.indexOf('OPCAO DE COMPRA') > -1 || 
+            linha.indexOf('OPCAO DE VENDA') > -1 ? Tipos.OPCOES : Tipos.SWING_TRADE;
         }
 
-        return Tipos.NAO_ATENDIDO;
+        return tipo;
     }
-
-    private csvJSON(csv) {
-        const lines = csv.split('\n');
-        const result = [];
-        const headers = lines[0].split(';');
-
-        for (let i = 1; i < lines.length; i++) {
-          const obj = {};
-          if (lines[i] !== '') {
-            const currentline = lines[i].split(';');
-
-            for (let j = 0; j < headers.length; j++) {
-              obj[headers[j]] = currentline[j];
-            }
-
-            result.push(obj);
-          }
-        }
-
-        return JSON.stringify(result);
-      }
 }

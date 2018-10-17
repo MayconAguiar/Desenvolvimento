@@ -1,11 +1,17 @@
 <div class="card-body">
-  <h5 class="card-title">{{ item.entrada.papeis[0].empresa }}</h5>
-  <div class="card-text">Entrada</div>  
-  <div class="card-text">Natureza: {{ item.entrada.papeis[0].natureza }}</div>  
-  <div class="card-text">Quantidade: {{ item.entrada.quantidade }}</div>  
-  <div class="card-text">Valor Médio: {{ item.entrada.ValorMedio()|number:'1.2-2' }}</div>  
-  <div class="card-text">Saída</div>  
-  <!-- <div *ngIf="item.saida.papeis.count !== 0" class="card-text">Natureza: {{ item.saida.papeis[0].natureza }}</div>   -->
-  <div class="card-text">Quantidade: {{ item.saida.quantidade }}</div>  
-  <div class="card-text">Valor Médio: {{ item.saida.ValorMedio()|number:'1.2-2' }}</div>  
+  <div *ngIf="item.entrada.existeValor()">
+    <h4 class="card-title">{{ item.entrada.papeis[0].empresa }}</h4>
+    <div class="card-text"><h5>Entrada</h5></div>  
+    <div class="card-text">Natureza: {{ item.entrada.papeis[0].natureza }}</div>  
+    <div class="card-text">Data: {{ item.entrada.data }}</div>  
+    <div class="card-text">Quantidade: {{ item.entrada.quantidade }}</div>  
+    <div class="card-text">Valor Médio: {{ item.entrada.ValorMedio()|number:'1.2-2' }}</div>  
+  </div>
+  <div *ngIf="item.entrada.existeValor()">
+    <div class="card-text"><h5>Saída</h5></div>  
+    <!-- <div *ngIf="item.saida.papeis.count !== 0" class="card-text">Natureza: {{ item.saida.papeis[0].natureza }}</div> -->
+    <div class="card-text">Data: {{ item.saida.data }}</div>  
+    <div class="card-text">Quantidade: {{ item.saida.quantidade }}</div>  
+    <div class="card-text">Valor Médio: {{ item.saida.ValorMedio()|number:'1.2-2' }}</div>  
+  </div>
 </div>

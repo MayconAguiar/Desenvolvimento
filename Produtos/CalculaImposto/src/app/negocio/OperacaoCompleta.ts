@@ -18,8 +18,21 @@ export class OperacaoCompleta {
         this.entrada = new EntradaOuSaida(operacao1);
         this.saida = new EntradaOuSaida(operacao2);
 
-        const quantidadeEntrada = this.operacaoAnterior.saldo.diferenca + this.entrada.quantidade;
+        this.atualizeValores();
+    }
+    
+    processeSaida(operacao1: Operacao[]) {        
+        this.saida = new EntradaOuSaida(operacao1);
+        this.atualizeValores();
+    }
+    
+    valorMedio() {
+        return this.saldo.valorMedio > 0 ?  (this.saldo.valorMedio + this.entrada.ValorMedio()) / 2 : this.entrada.ValorMedio();
+    }
 
+    private atualizeValores() {
+        const quantidadeEntrada = this.operacaoAnterior.saldo.diferenca + this.entrada.quantidade;
+        
         // vai terminar a operação vendido;
         // garante que as entradas sempre serão maiores
         if (quantidadeEntrada < this.saida.quantidade) {
@@ -31,11 +44,7 @@ export class OperacaoCompleta {
         this.saldo.valorMedio = this.entrada.ValorMedio();
     }
 
-    valorMedio() {
-        return this.saldo.valorMedio > 0 ?  (this.saldo.valorMedio + this.entrada.ValorMedio()) / 2 : this.entrada.ValorMedio();
-    }
-
-    inverta() {
+    private inverta() {
         const aux = this.saida;
         this.saida = this.entrada;
         this.entrada = aux;
