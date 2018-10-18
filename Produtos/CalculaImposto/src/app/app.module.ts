@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import {MomentModule} from 'angular2-moment/moment.module';
 
 
@@ -10,7 +10,12 @@ import { DatasComponent } from './filtros/datas/datas.component';
 import { ResumoComponent } from './resumo/resumo.component';
 import { TiposComponent } from './filtros/tipos/tipos.component';
 import { UploadButtonComponent } from './upload-button/upload-button.component';
+import { ItemResumoComponent } from './item-resumo/item-resumo.component';
+import { CurrencyFormatPipe } from './currency-format.pipe';
+import localeBR from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(localeBR);
 
 @NgModule({
   declarations: [
@@ -20,12 +25,14 @@ import { UploadButtonComponent } from './upload-button/upload-button.component';
     DatasComponent,
     ResumoComponent,
     TiposComponent,
-    UploadButtonComponent
+    UploadButtonComponent,
+    ItemResumoComponent,
+    CurrencyFormatPipe
   ],
   imports: [
     BrowserModule, MomentModule
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

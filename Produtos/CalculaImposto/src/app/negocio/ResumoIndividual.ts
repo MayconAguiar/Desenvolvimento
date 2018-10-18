@@ -26,6 +26,8 @@ export class ResumoIndividual  {
             const taxaDeLiquidacao = valorDaOperacao * (0.0275 / 100);
             const emolumentos = valorDaOperacao * 0.00004829;
             const iss = this.corretagem * (9.65 / 100);
+            const iprfretido = (this.totalVenda * 0.00005);
+            this.impostoRetido = this.lucroOuPrejuizo > 0 && iprfretido > 1? iprfretido : 0;
 
             this.taxas = taxaDeLiquidacao + emolumentos + iss + (this.corretagem * this.item.entrada.count);
         }
