@@ -49,7 +49,7 @@ export class Gerenciador {
 
         });
 
-        console.log(this.resultado);
+        // console.log(this.resultado);
         return this.resultado;
     }
 

@@ -21,7 +21,7 @@ export class ResumoIndividual  {
         if (this.item.saida.existeValor()) {
             const totalEntrada = this.item.entrada.ValorMedio() * this.item.saida.quantidade;
             this.totalVenda = this.item.saida.ValorMedio() * this.item.saida.quantidade;
-            this.lucroOuPrejuizo = totalEntrada - this.totalVenda;
+            this.lucroOuPrejuizo = this.totalVenda -totalEntrada;
             const valorDaOperacao = (totalEntrada + this.totalVenda);
             const taxaDeLiquidacao = valorDaOperacao * (0.0275 / 100);
             const emolumentos = valorDaOperacao * 0.00004829;

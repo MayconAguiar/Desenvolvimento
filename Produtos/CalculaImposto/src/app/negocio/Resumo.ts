@@ -9,7 +9,7 @@ export class Resumo  {
     impostoAPagar = 0;
 
     constructor(itens: ItemDashboard[]) {
-
+        this.construa(itens);
     }
 
     private construa(itens: ItemDashboard[]) {

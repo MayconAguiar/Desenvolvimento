@@ -47,8 +47,8 @@ export class ArquivosPDF {
             reader.readAsArrayBuffer(file);
         } else {
             observer.next(this.lista);
-            console.log('lista com todos');
-            console.log(this.lista);
+            // console.log('lista com todos');
+            // console.log(this.lista);
              observer.complete();
         }
     }

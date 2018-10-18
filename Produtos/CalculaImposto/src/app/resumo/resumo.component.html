@@ -1,0 +1,20 @@
+<div *ngIf="resumo| async as item" class="item">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h4 class="card-title">Taxas</h4>
+            <div class="card-text">Total :{{ item.taxas|number:'1.2-2' }}</div>
+        </div>
+    </div> 
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h4 class="card-title">Lucro ou Prejuizo</h4>
+            <div class="card-text">Total :{{ item.lucroOuPrejuizo|number:'1.2-2' }}</div>
+        </div>  
+    </div> 
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h4 class="card-title">Vendas</h4>
+            <div class="card-text">Total :{{ item.totalVenda|number:'1.2-2' }}</div>
+        </div>
+    </div> 
+</div>

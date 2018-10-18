@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemDashboardComponent } from './item-dashboard/item-dashboard.component';
 import { DatasComponent } from './filtros/datas/datas.component';
+import { ResumoComponent } from './resumo/resumo.component';
+import { TiposComponent } from './filtros/tipos/tipos.component';
+import { UploadButtonComponent } from './upload-button/upload-button.component';
 
 
 @NgModule({
@@ -14,7 +17,10 @@ import { DatasComponent } from './filtros/datas/datas.component';
     AppComponent,
     DashboardComponent,
     ItemDashboardComponent,
-    DatasComponent
+    DatasComponent,
+    ResumoComponent,
+    TiposComponent,
+    UploadButtonComponent
   ],
   imports: [
     BrowserModule, MomentModule

@@ -18,11 +18,12 @@ export class DatasComponent implements OnInit {
   @Output() mudoumes: EventEmitter<number> = new EventEmitter();
 
   ngOnInit() {
-    this.atual = new Date().getMonth();
+    this.atual = new Date().getMonth() - 1;
+    this.atual = this.atual === -1 ? 11: this.atual;
     moment.locale('pt-br');
     this.meses = moment.months();
     this.descricao = this.meses[this.atual];
-    // this.mudoumes.emit(this.atual);
+    this.mudoumes.emit(this.atual);
   }
 
   mudou(mes) {
